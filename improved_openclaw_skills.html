@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw 技能集合 - 中文版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .search-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box:focus {
+            border-color: #667eea;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #e9ecef;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .categories {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .category {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .skill-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .skill-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 0.8rem;
+        }
+
+        .skill-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            transition: background 0.3s ease;
+        }
+
+        .skill-link:hover {
+            background: #5a6fd8;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .toggle-category {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .download-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .download-btn, .language-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .download-btn:hover, .language-btn:hover {
+            background: #218838;
+        }
+
+        .language-selector {
+            margin-top: 1rem;
+        }
+
+        .feature-intro {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+
+        .page-btn {
+            padding: 8px 15px;
+            background: #e9ecef;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .page-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .page-btn:hover:not(.active) {
+            background: #667eea;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>OpenClaw 技能集合</h1>
+            <p class="subtitle">发现 1715+ 社区构建的 OpenClaw 技能，按类别组织</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="total-skills">加载中...</span>
+                    <span>总技能数</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="total-categories">加载中...</span>
+                    <span>类别数</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="feature-intro">
+            <h2>功能介绍</h2>
+            <p>OpenClaw技能集合是一个综合性的AI技能索引，收录了社区贡献的各种实用技能，涵盖Web开发、AI代理、Git管理、系统运维等多个领域。</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-title">🔍 智能搜索</div>
+                    <p>通过技能名称、描述或类别快速查找所需技能</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">🏷️ 分类浏览</div>
+                    <p>按类别筛选技能，便于发现相关功能</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">📋 详细说明</div>
+                    <p>每个技能都有详细的中文解释和使用场景</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">🌐 双语支持</div>
+                    <p>支持中英文版本切换，满足不同用户需求</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">💾 便捷下载</div>
+                    <p>可下载完整的技能列表，离线查阅</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">📱 响应式设计</div>
+                    <p>适配手机、平板、电脑等多种设备</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h2>下载技能列表</h2>
+            <p>点击下方按钮下载完整的技能列表文件</p>
+            <button class="download-btn" onclick="downloadSkills()">下载技能列表 (JSON格式)</button>
+            
+            <div class="language-selector">
+                <p>语言切换：</p>
+                <a href="/english.html" class="language-btn">English Version</a>
+                <a href="/" class="language-btn">中文版</a>
+            </div>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-box" placeholder="按名称、描述或类别搜索技能...">
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterByCategory('all')">全部</button>
+                <!-- 分类筛选将动态添加 -->
+            </div>
+        </div>
+
+        <div id="skillsContainer" class="categories">
+            <!-- 技能将动态填充 -->
+        </div>
+
+        <div id="noResults" class="no-results" style="display: none;">
+            <h3>未找到技能</h3>
+            <p>请尝试调整搜索关键词</p>
+        </div>
+
+        <div class="pagination" id="pagination">
+            <!-- 分页按钮将动态添加 -->
+        </div>
+    </div>
+
+    <script>
+        // 技能数据
+        const skills = [
+            {
+                name: 'artifacts-builder',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/seanphan/artifacts-builder/SKILL.md',
+                description: 'Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web',
+                category: 'Web & Frontend Development',
+                explanation: '用于使用现代前端网络技术创建复杂、多组件 claude.ai HTML 工件的工具套件'
+            },
+            {
+                name: 'claw-shell',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/imaginelogo/claw-shell/SKILL.md',
+                description: 'ALWAYS USES TMUX SESSION `claw`',
+                category: 'Web & Frontend Development',
+                explanation: '始终使用TMUX会话`claw`'
+            },
+            {
+                name: 'clawdbot-zoho-email',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/briansmith80/clawdbot-zoho-email/SKILL.md',
+                description: 'Complete Zoho Mail integration with OAuth2, REST API (5-10x faster), HTML emails, attachments',
+                category: 'Web & Frontend Development',
+                explanation: '使用OAuth2、REST API（快5-10倍）、HTML邮件、附件的完整Zoho Mail集成'
+            },
+            {
+                name: 'comfy-ai',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/tullyhu/comfy-ai/SKILL.md',
+                description: 'Integrates with local ComfyUI instance at http://192.168.31.7:8000 to generate images from text (txt2img) and edit',
+                category: 'Web & Frontend Development',
+                explanation: '与本地ComfyUI实例集成以从文本生成图像（txt2img）和编辑'
+            },
+            {
+                name: 'comfyui-runner',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/xtopher86/comfyui-runner/SKILL.md',
+                description: 'Start/stop/status for a ComfyUI instance',
+                category: 'Web & Frontend Development',
+                explanation: 'ComfyUI实例的启动/停止/状态'
+            },
+            {
+                name: 'computer-use',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/ram-raghav-s/computer-use/SKILL.md',
+                description: 'Full desktop computer use for headless Linux servers',
+                category: 'Web & Frontend Development',
+                explanation: '无头Linux服务器的完整桌面计算机使用'
+            },
+            {
+                name: 'deliberate-frontend-redesign',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/vishnubedi3/deliberate-frontend-redesign/SKILL.md) - [discord](https://github.com/openclaw/skills/tree/main/skills/steipete/discord/SKILL.md',
+                description: 'Use when you need to control Discord from Clawdbot via the discord tool: send messages, react',
+                category: 'Web & Frontend Development',
+                explanation: '当您需要通过discord工具从Clawdbot控制Discord时使用：发送消息、反应'
+            },
+            {
+                name: 'downloads',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/gxsy886/downloads/SKILL.md',
+                description: 'Create distinctive, production-grade frontend interfaces with high design quality',
+                category: 'Web & Frontend Development',
+                explanation: '创建具有高设计质量的独特、生产级前端界面'
+            },
+            {
+                name: 'emporia-energy',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/urosorozel/emporia-energy/SKILL.md',
+                description: 'Direct Emporia Vue energy queries via Emporia cloud (PyEmVue) or local ESPHome API',
+                category: 'Web & Frontend Development',
+                explanation: '通过Emporia云（PyEmVue）或本地ESPHome API直接查询Emporia Vue能源数据'
+            },
+            {
+                name: 'fanvue',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/igorls/fanvue/SKILL.md',
+                description: 'Manage content, chats, subscribers, and earnings on the Fanvue creator platform via OAuth 2.0 API',
+                category: 'Web & Frontend Development',
+                explanation: '通过OAuth 2.0 API管理Fanvue创作者平台上的内容、聊天、订阅者和收入'
+            },
+            {
+                name: 'frontend-design',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/steipete/frontend-design/SKILL.md',
+                description: 'Create distinctive, production-grade frontend interfaces with high design quality',
+                category: 'Web & Frontend Development',
+                explanation: '创建具有高设计质量的独特、生产级前端界面'
+            },
+            {
+                name: 'giphy',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/minbang930/giphy/SKILL.md',
+                description: 'Search and send contextual GIFs from Giphy in Discord conversations',
+                category: 'Web & Frontend Development',
+                explanation: '在Discord对话中搜索和发送情境相关的GIF'
+            },
+            {
+                name: 'human-optimized-frontend',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/vishnubedi3/human-optimized-frontend/SKILL.md) - [linux-service-triage](https://github.com/openclaw/skills/tree/main/skills/kowl64/linux-service-triage/SKILL.md',
+                description: 'Diagnoses common Linux service issues using logs, systemd/PM2, file permissions',
+                category: 'Web & Frontend Development',
+                explanation: '使用日志、systemd/PM2、文件权限诊断常见的Linux服务问题'
+            },
+            {
+                name: 'miniflux-news',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/hartlco/miniflux-news/SKILL.md',
+                description: 'Fetch and triage the latest unread RSS/news entries from a Miniflux instance',
+                category: 'Web & Frontend Development',
+                explanation: '从Miniflux实例获取和筛选最新的未读RSS/新闻条目'
+            },
+            {
+                name: 'nextjs-expert',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/jgarrison929/nextjs-expert/SKILL.md',
+                description: 'Use when building Next.js 14/15 applications with the App Router',
+                category: 'Web & Frontend Development',
+                explanation: '在使用App Router构建Next.js 14/15应用程序时使用'
+            },
+            {
+                name: 'niri-ipc',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/atefr/niri-ipc/SKILL.md',
+                description: 'Control the Niri Wayland compositor on Linux via its IPC (`niri msg --json` / $NIRI_SOCKET)',
+                category: 'Web & Frontend Development',
+                explanation: '通过IPC（`niri msg --json` / $NIRI_SOCKET）控制Linux上的Niri Wayland合成器'
+            },
+            {
+                name: 'nodetool',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/georgi/nodetool/SKILL.md',
+                description: 'Visual AI workflow builder - ComfyUI meets n8n for LLM agents, RAG pipelines, and multimodal data flows',
+                category: 'Web & Frontend Development',
+                explanation: '可视化AI工作流构建器 - ComfyUI与n8n结合用于LLM代理、RAG管道和多模态数据流'
+            },
+            {
+                name: 'pinak-frontend-guru',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/sharanga10/pinak-frontend-guru/SKILL.md',
+                description: 'Expert UI/UX and React performance auditor (PinakBot persona)',
+                category: 'Web & Frontend Development',
+                explanation: '专家UI/UX和React性能审计员（PinakBot角色）'
+            },
+            {
+                name: 'react-email-skills',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/christina-de-martinez/react-email-skills/SKILL.md',
+                description: 'Create beautiful, responsive HTML emails using React components with React Email',
+                category: 'Web & Frontend Development',
+                explanation: '使用React组件和React Email创建美观、响应式的HTML电子邮件'
+            },
+            {
+                name: 'remotion-best-practices',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/am-will/remotion-best-practices/SKILL.md',
+                description: 'Best practices for Remotion - Video creation in React',
+                category: 'Web & Frontend Development',
+                explanation: 'Remotion的最佳实践 - 在React中创建视频'
+            },
+            {
+                name: 'remotion-server',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/mvanhorn/remotion-server/SKILL.md',
+                description: 'Headless video rendering with Remotion',
+                category: 'Web & Frontend Development',
+                explanation: '使用Remotion进行无头视频渲染'
+            },
+            {
+                name: 'remotion-video-toolkit',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/shreefentsar/remotion-video-toolkit/SKILL.md',
+                description: 'Complete toolkit for programmatic video creation with Remotion + React',
+                category: 'Web & Frontend Development',
+                explanation: '使用Remotion + React进行程序化视频创建的完整工具包'
+            },
+            {
+                name: 'resume-builder',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/amruthpillai/resume-builder/SKILL.md',
+                description: 'Generate professional resumes that conform to the Reactive Resume schema',
+                category: 'Web & Frontend Development',
+                explanation: '生成符合Reactive Resume模式的专业简历'
+            },
+            {
+                name: 'senior-fullstack',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/alirezarezvani/senior-fullstack/SKILL.md',
+                description: 'Fullstack development toolkit with project scaffolding for Next.js/FastAPI/MERN/Django stacks and code quality',
+                category: 'Web & Frontend Development',
+                explanation: '带有项目脚手架的全栈开发工具包，支持Next.js/FastAPI/MERN/Django堆栈和代码质量'
+            },
+            {
+                name: 'slack',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/steipete/slack/SKILL.md',
+                description: 'Use when you need to control Slack from Clawdbot via the Slack tool',
+                category: 'Web & Frontend Development',
+                explanation: '当您需要通过Slack工具从Clawdbot控制Slack时使用'
+            },
+            {
+                name: 'smtp-send',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/xiwan/smtp-send/SKILL.md',
+                description: 'Send emails via SMTP with support for plain text, HTML',
+                category: 'Web & Frontend Development',
+                explanation: '通过SMTP发送邮件，支持纯文本、HTML'
+            },
+            {
+                name: 'technews',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/kesslerio/technews/SKILL.md',
+                description: 'Fetches top stories from TechMeme, summarizes linked articles, and highlights social media reactions',
+                category: 'Web & Frontend Development',
+                explanation: '获取TechMeme的热门故事，总结链接文章，并突出社交媒体反应'
+            },
+            {
+                name: 'telegram-reaction-prober',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/deadlysilent/telegram-reaction-prober/SKILL.md',
+                description: 'Probe which emoji reactions are accepted in a specific Telegram chat/message, record an allow/deny list',
+                category: 'Web & Frontend Development',
+                explanation: '探测特定Telegram聊天/消息接受的emoji反应，记录允许/拒绝列表'
+            },
+            {
+                name: 'trmnl',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/peetzweg/trmnl/SKILL.md',
+                description: 'Generate content for TRMNL e-ink display devices using the TRMNL CSS framework',
+                category: 'Web & Frontend Development',
+                explanation: '使用TRMNL CSS框架为TRMNL电子墨水显示屏设备生成内容'
+            },
+            {
+                name: 'ui-audit',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/tommygeoco/ui-audit/SKILL.md',
+                description: 'AI skill for automated UI audits',
+                category: 'Web & Frontend Development',
+                explanation: '用于自动UI审核的AI技能'
+            },
+            {
+                name: 'ui-design-system',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/alirezarezvani/ui-design-system/SKILL.md',
+                description: 'UI design system toolkit for Senior UI Designer including design token generation, component documentation',
+                category: 'Web & Frontend Development',
+                explanation: '高级UI设计师的UI设计系统工具包，包括设计令牌生成、组件文档'
+            },
+            {
+                name: 'ui-skills',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/correctroadh/ui-skills/SKILL.md',
+                description: 'Opinionated constraints for building better interfaces with agents',
+                category: 'Web & Frontend Development',
+                explanation: '使用代理构建更好界面的意见性约束'
+            },
+            {
+                name: 'ui-ux-master',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/kdbhalala/ui-ux-master/SKILL.md',
+                description: 'Master UI/UX design skill combining Apple HIG, modern web design, SuperDesign patterns',
+                category: 'Web & Frontend Development',
+                explanation: '结合Apple HIG、现代网络设计、SuperDesign模式的主UI/UX设计技能'
+            },
+            {
+                name: 'ui-ux-pro-max',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/xobi667/ui-ux-pro-max/SKILL.md',
+                description: 'UI/UX design intelligence and implementation guidance for building polished interfaces',
+                category: 'Web & Frontend Development',
+                explanation: '用于构建精美界面的UI/UX设计智能和实施指导'
+            },
+            {
+                name: 'ux-audit',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/tommygeoco/ux-audit/SKILL.md',
+                description: 'AI skill for automated design audits',
+                category: 'Web & Frontend Development',
+                explanation: '用于自动设计审核的AI技能'
+            },
+            {
+                name: 'ux-decisions',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/tommygeoco/ux-decisions/SKILL.md',
+                description: 'AI skill for the Making UX Decisions framework (uxdecisions.com) by Tommy Geoco',
+                category: 'Web & Frontend Development',
+                explanation: 'Tommy Geoco的Making UX Decisions框架的AI技能(uxdecisions.com)'
+            },
+            {
+                name: 'ux-researcher-designer',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/alirezarezvani/ux-researcher-designer/SKILL.md',
+                description: 'UX research and design toolkit for Senior UX Designer/Researcher including data-driven persona generation, journey',
+                category: 'Web & Frontend Development',
+                explanation: '高级UX设计师/研究员的UX研究和设计工具包，包括数据驱动的人物角色生成、用户旅程'
+            },
+            {
+                name: 'vercel-react-best-practices',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/sharanga10/vercel-react-best-practices/SKILL.md',
+                description: 'React and Next.js performance optimization guidelines from Vercel Engineering',
+                category: 'Web & Frontend Development',
+                explanation: '来自Vercel工程的React和Next.js性能优化指南'
+            },
+            {
+                name: 'vision-sandbox',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/johanesalxd/vision-sandbox/SKILL.md',
+                description: 'Agentic Vision via Gemini\'s native Code Execution sandbox',
+                category: 'Web & Frontend Development',
+                explanation: '通过Gemini的原生代码执行沙盒进行代理视觉'
+            },
+            {
+                name: 'web-design-guidelines',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/sharanga10/web-design-guidelines/SKILL.md',
+                description: 'Review UI code for Web Interface Guidelines compliance',
+                category: 'Web & Frontend Development',
+                explanation: '审查UI代码以符合Web界面指南'
+            },
+            {
+                name: 'webapp-testing',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/seanphan/webapp-testing/SKILL.md',
+                description: 'Toolkit for interacting with and testing local web applications using Playwright',
+                category: 'Web & Frontend Development',
+                explanation: '使用Playwright与本地Web应用程序交互和测试的工具包'
+            },
+            {
+                name: 'winamp',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/jage9/winamp/SKILL.md',
+                description: 'Control Winamp on Windows (Native or WSL2) or Linux (via Wine)',
+                category: 'Web & Frontend Development',
+                explanation: '在Windows（本机或WSL2）或Linux（通过Wine）上控制Winamp'
+            },
+            {
+                name: 'xcodebuildmcp',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/ipavlidakis/xcodebuildmcp/SKILL.md',
+                description: 'Use when the user needs Xcode build/test/run workflows, simulator or device control, UI automation',
+                category: 'Web & Frontend Development',
+                explanation: '当用户需要Xcode构建/测试/运行工作流、模拟器或设备控制、UI自动化时使用'
+            },
+            {
+                name: 'zoho-email-integration',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/briansmith80/zoho-email-integration/SKILL.md',
+                description: 'Complete Zoho Mail integration with OAuth2, REST API (5-10x faster), HTML emails, attachments',
+                category: 'Web & Frontend Development',
+                explanation: '使用OAuth2、REST API（快5-10倍）、HTML邮件、附件的完整Zoho Mail集成'
+            },
+            {
+                name: 'agenticflow-skill',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/seanphan/agenticflow-skill/SKILL.md',
+                description: 'Comprehensive guide for building AI workflows, agents, and workforce systems with AgenticFlow',
+                category: 'Coding Agents & IDEs',
+                explanation: '使用AgenticFlow构建AI工作流、代理和工作力系统的综合指南'
+            },
+            {
+                name: 'agentlens',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/nguyenphutrong/agentlens/SKILL.md',
+                description: 'Navigate and understand codebases using agentlens hierarchical documentation',
+                category: 'Coding Agents & IDEs',
+                explanation: '使用agentlens分层文档导航和理解代码库'
+            },
+            {
+                name: 'apple-hig',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/kdbhalala/apple-hig/SKILL.md',
+                description: 'Expert guide for designing iOS, macOS, watchOS, tvOS, and visionOS apps following Apple Human Interface Guidelines',
+                category: 'Coding Agents & IDEs',
+                explanation: '遵循Apple人机界面指南设计iOS、macOS、watchOS、tvOS和visionOS应用的专家指南'
+            },
+            {
+                name: 'backend-patterns',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/charmmm718/backend-patterns/SKILL.md',
+                description: 'Backend architecture patterns, API design, database optimization, and server-side best practices for Node.js, Express',
+                category: 'Coding Agents & IDEs',
+                explanation: 'Node.js、Express的后端架构模式、API设计、数据库优化和服务器端最佳实践'
+            },
+            {
+                name: 'bot-bowl-party',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/fsa317/bot-bowl-party/SKILL.md',
+                description: 'Complete guide for AI agents to participate in BotBowl Party — a virtual Super Bowl party for bots',
+                category: 'Coding Agents & IDEs',
+                explanation: 'AI代理参加BotBowl Party的完整指南——机器人的虚拟超级碗派对'
+            },
+            {
+                name: 'botpress-adk',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/yueranlu/botpress-adk/SKILL.md',
+                description: 'A guide to build AI bots with Botpress\'s Agent Development Kit (ADK)',
+                category: 'Coding Agents & IDEs',
+                explanation: '使用Botpress的代理开发工具包(ADK)构建AI机器人的指南'
+            },
+            {
+                name: 'browse',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/pkiv/browse/SKILL.md',
+                description: 'Complete guide for creating and deploying browser automation functions using the stagehand CLI',
+                category: 'Coding Agents & IDEs',
+                explanation: '使用stagehand CLI创建和部署浏览器自动化功能的完整指南'
+            },
+            {
+                name: 'claude-optimised',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/hexnickk/claude-optimised/SKILL.md',
+                description: 'Guide for writing and optimizing CLAUDE.md files for maximum Claude Code performance',
+                category: 'Coding Agents & IDEs',
+                explanation: '为最大化Claude Code性能编写和优化CLAUDE.md文件的指南'
+            },
+            {
+                name: 'claude-team',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/jalehman/claude-team/SKILL.md',
+                description: 'Orchestrate multiple Claude Code workers via iTerm2 using the claude-team MCP server',
+                category: 'Coding Agents & IDEs',
+                explanation: '通过iTerm2使用claude-team MCP服务器编排多个Claude Code工作者'
+            },
+            {
+                name: 'code-mentor',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/samuelkahessay/code-mentor/SKILL.md',
+                description: 'Comprehensive AI programming tutor for all levels',
+                category: 'Coding Agents & IDEs',
+                explanation: '面向所有级别的综合AI编程导师'
+            },
+            {
+                name: 'codeconductor',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/larsonreever/codeconductor/SKILL.md) - [codex-account-switcher](https://github.com/openclaw/skills/tree/main/skills/odrobnik/codex-account-switcher/SKILL.md',
+                description: 'Manage multiple OpenAI Codex accounts',
+                category: 'Coding Agents & IDEs',
+                explanation: '管理多个OpenAI Codex账户'
+            },
+            {
+                name: 'codex-monitor',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/odrobnik/codex-monitor/SKILL.md',
+                description: 'Browse OpenAI Codex session logs stored',
+                category: 'Coding Agents & IDEs',
+                explanation: '浏览存储的OpenAI Codex会话日志'
+            },
+            {
+                name: 'codex-orchestration',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/shanelindsay/codex-orchestration/SKILL.md',
+                description: 'General-purpose orchestration for Codex',
+                category: 'Coding Agents & IDEs',
+                explanation: 'Codex的通用编排'
+            },
+            {
+                name: 'codex-quota',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/odrobnik/codex-quota/SKILL.md',
+                description: 'Check OpenAI Codex CLI rate limit status (daily/weekly quotas) using local session',
+                category: 'Coding Agents & IDEs',
+                explanation: '使用本地会话检查OpenAI Codex CLI速率限制状态（每日/每周配额）'
+            },
+            {
+                name: 'codexmonitor',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/odrobnik/codexmonitor/SKILL.md',
+                description: 'List/inspect/watch local OpenAI Codex sessions (CLI + VS Code)',
+                category: 'Coding Agents & IDEs',
+                explanation: '列出/检查/监视本地OpenAI Codex会话（CLI + VS Code）'
+            },
+            {
+                name: 'coding-agent',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/steipete/coding-agent/SKILL.md',
+                description: 'Run Codex CLI, Claude Code, OpenCode, or Pi Coding Agent',
+                category: 'Coding Agents & IDEs',
+                explanation: '运行Codex CLI、Claude Code、OpenCode或Pi编码代理'
+            },
+            {
+                name: 'content-id-guide',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/otherpowers/content-id-guide/SKILL.md',
+                description: 'A calm way for creators to understand and organize automated content claims across platforms, so nothing important',
+                category: 'Coding Agents & IDEs',
+                explanation: '创作者理解和组织跨平台自动化内容声明的冷静方式，因此不会遗漏重要事项'
+            },
+            {
+                name: 'cursor-agent',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/swiftlysingh/cursor-agent/SKILL.md',
+                description: 'A comprehensive skill for using the Cursor CLI agent',
+                category: 'Coding Agents & IDEs',
+                explanation: '使用Cursor CLI代理的综合技能'
+            },
+            {
+                name: 'debug-pro',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/cmanfre7/debug-pro/SKILL.md',
+                description: 'Systematic debugging methodology and language-specific debugging commands',
+                category: 'Coding Agents & IDEs',
+                explanation: '系统调试方法论和语言特定调试命令'
+            },
+            {
+                name: 'doc-coauthoring',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/seanphan/doc-coauthoring/SKILL.md',
+                description: 'Guide users through a structured workflow for co-authoring documentation',
+                category: 'Coding Agents & IDEs',
+                explanation: '引导用户通过协作编写文档的结构化工作流'
+            },
+            {
+                name: 'docker-essentials',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/arnarsson/docker-essentials/SKILL.md',
+                description: 'Essential Docker commands and workflows for container management, image operations',
+                category: 'Coding Agents & IDEs',
+                explanation: '容器管理、镜像操作的必备Docker命令和工作流'
+            },
+            {
+                name: 'executing-plans',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/chenleiyanquan/executing-plans/SKILL.md',
+                description: 'Use when you have a written implementation plan to execute in a separate session with review checkpoints',
+                category: 'Coding Agents & IDEs',
+                explanation: '当您有书面实施计划在单独会话中执行并设置审查检查点时使用'
+            },
+            {
+                name: 'factory-ai',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/mitchellbernstein/factory-ai/SKILL.md',
+                description: 'Use Factory AI\'s droid CLI for software engineering tasks',
+                category: 'Coding Agents & IDEs',
+                explanation: '使用Factory AI的droid CLI进行软件工程任务'
+            },
+            {
+                name: 'file-links-tool',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/mrbeandev/file-links-tool/SKILL.md',
+                description: 'Securely upload files from your private AI workspace and provide your owner with a direct download',
+                category: 'Coding Agents & IDEs',
+                explanation: '从您的私有AI工作空间安全上传文件并为您的所有者提供直接下载'
+            },
+            {
+                name: 'gembox-skill',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/zsvedic/gembox-skill/SKILL.md',
+                description: 'Coding assistance for [GemBox',
+                category: 'Coding Agents & IDEs',
+                explanation: '[GemBox的编码辅助'
+            },
+            {
+                name: 'get-tldr',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/itobey/get-tldr/SKILL.md',
+                description: 'Provide the summary returned by the get-tldr.com summarize API without further summarization; the skill should format',
+                category: 'Coding Agents & IDEs',
+                explanation: '提供get-tldr.com汇总API返回的摘要，无需进一步汇总；技能应格式化'
+            },
+            {
+                name: 'go2gg',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/rakesh1002/go2gg/SKILL.md',
+                description: 'Use Go2.gg API for URL shortening, link analytics, QR code generation, webhooks, and link-in-bio pages',
+                category: 'Coding Agents & IDEs',
+                explanation: '使用Go2.gg API进行URL缩短、链接分析、二维码生成、webhooks和bio链接页面'
+            },
+            {
+                name: 'java-change-with-tests',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/tanerilyazov/java-change-with-tests/SKILL.md',
+                description: '- Any Java change that must be merged safely',
+                category: 'Coding Agents & IDEs',
+                explanation: '- 任何必须安全合并的Java更改'
+            },
+            {
+                name: 'jo4',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/anandrathnas/jo4/SKILL.md',
+                description: 'URL shortener, QR code generator, and link analytics API',
+                category: 'Coding Agents & IDEs',
+                explanation: 'URL缩短器、二维码生成器和链接分析API'
+            },
+            {
+                name: 'kimi-integration',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/evgyur/kimi-integration/SKILL.md',
+                description: 'Step-by-step guide for integrating Moonshot AI (Kimi) and Kimi Code models into Clawdbot',
+                category: 'Coding Agents & IDEs',
+                explanation: '将月之暗面AI（Kimi）和Kimi Code模型集成到Clawdbot的逐步指南'
+            },
+            {
+                name: 'logseq',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/juanirm/logseq/SKILL.md',
+                description: 'Provide commands for interacting with a local Logseq instance through its Plugin API',
+                category: 'Coding Agents & IDEs',
+                explanation: '通过其插件API提供与本地Logseq实例交互的命令'
+            },
+            {
+                name: 'mcp-builder',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/seanphan/mcp-builder/SKILL.md',
+                description: 'Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external servi',
+                category: 'Coding Agents & IDEs',
+                explanation: '创建高质量MCP（模型上下文协议）服务器的指南，使LLM能够与外部服务交互'
+            },
+            {
+                name: 'model-usage',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/steipete/model-usage/SKILL.md',
+                description: 'Use CodexBar CLI local cost usage to summarize per-model usage for Codex',
+                category: 'Coding Agents & IDEs',
+                explanation: '使用CodexBar CLI本地成本使用量汇总Codex的每模型使用情况'
+            },
+            {
+                name: 'multi-coding-agent',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/kesslerio/multi-coding-agent/SKILL.md',
+                description: 'Run Codex CLI, Claude Code, OpenCode, or Pi Coding Agent via background process for programmatic control',
+                category: 'Coding Agents & IDEs',
+                explanation: '通过后台进程运行Codex CLI、Claude Code、OpenCode或Pi编码代理进行程序控制'
+            },
+            {
+                name: 'noir-developer',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/jp4g/noir-developer/SKILL.md',
+                description: 'Develop Noir (.nr) codebases',
+                category: 'Coding Agents & IDEs',
+                explanation: '开发Noir (.nr) 代码库'
+            },
+            {
+                name: 'opencode-acp-control',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/bjesuiter/opencode-acp-control/SKILL.md',
+                description: 'Control OpenCode directly via the Agent Client Protocol (ACP)',
+                category: 'Coding Agents & IDEs',
+                explanation: '通过代理客户端协议(ACP)直接控制OpenCode'
+            },
+            {
+                name: 'openspec',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/jcorrego/openspec/SKILL.md',
+                description: 'Spec-driven development with OpenSpec',
+                category: 'Coding Agents & IDEs',
+                explanation: '使用OpenSpec进行规范驱动开发'
+            },
+            {
+                name: 'perry-coding-agents',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/gricha/perry-coding-agents/SKILL.md',
+                description: 'Dispatch coding tasks to OpenCode or Claude Code on Perry workspaces',
+                category: 'Coding Agents & IDEs',
+                explanation: '将编码任务分派到Perry工作空间的OpenCode或Claude Code'
+            },
+            {
+                name: 'perry-workspaces',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/gricha/perry-workspaces/SKILL.md',
+                description: 'Create and manage isolated Docker workspaces on your tailnet with Claude',
+                category: 'Coding Agents & IDEs',
+                explanation: '在tailnet上使用Claude创建和管理隔离的Docker工作空间'
+            },
+            {
+                name: 'pro',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/jash2368-collab/pro/SKILL.md',
+                description: 'Guide for creating effective skills',
+                category: 'Coding Agents & IDEs',
+                explanation: '创建有效技能的指南'
+            },
+            {
+                name: 'prompt-log',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/thesash/prompt-log/SKILL.md',
+                description: 'Extract conversation transcripts from AI coding session logs (Clawdbot, Claude Code, Codex)',
+                category: 'Coding Agents & IDEs',
+                explanation: '从AI编码会话日志（Clawdbot、Claude Code、Codex）中提取对话转录'
+            },
+            {
+                name: 'pulse-editor',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/shellishack/pulse-editor/SKILL.md',
+                description: 'Generate and build Pulse Apps using the Vibe Dev Flow API',
+                category: 'Coding Agents & IDEs',
+                explanation: '使用Vibe Dev Flow API生成和构建Pulse应用'
+            },
+            {
+                name: 'receiving-code-review',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/chenleiyanquan/receiving-code-review/SKILL.md',
+                description: 'Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear',
+                category: 'Coding Agents & IDEs',
+                explanation: '在接收代码审查反馈时使用，在实施建议之前，特别是如果反馈似乎不清楚'
+            },
+            {
+                name: 'satellite-copilot',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/davestarling/satellite-copilot/SKILL.md',
+                description: 'Predict satellite passes (NOAA APT, METEOR LRPT, ISS) for a configured latitude/longitude and send WhatsApp alerts',
+                category: 'Coding Agents & IDEs',
+                explanation: '预测配置纬度/经度的卫星过境（NOAA APT、METEOR LRPT、ISS）并发送WhatsApp警报'
+            },
+            {
+                name: 'senior-architect',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/alirezarezvani/senior-architect/SKILL.md',
+                description: 'This skill should be used when the user asks to "design system architecture", "evaluate microservices vs monolith"',
+                category: 'Coding Agents & IDEs',
+                explanation: '当用户要求"设计系统架构"、"评估微服务与单体架构"时应使用此技能'
+            },
+            {
+                name: 'skill-content-id-guide',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/otherpowers/skill-content-id-guide/SKILL.md',
+                description: 'Procedural clarity and evidence organization for creators managing automated content claims across platforms',
+                category: 'Coding Agents & IDEs',
+                explanation: '创作者管理跨平台自动化内容声明的程序清晰度和证据组织'
+            },
+            {
+                name: 'skill-creator',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/chindden/skill-creator/SKILL.md',
+                description: 'Guide for creating effective skills',
+                category: 'Coding Agents & IDEs',
+                explanation: '创建有效技能的指南'
+            },
+            {
+                name: 'skill-creator-0-1-0',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/ljglover/skill-creator-0-1-0/SKILL.md',
+                description: 'Guide for creating effective skills',
+                category: 'Coding Agents & IDEs',
+                explanation: '创建有效技能的指南'
+            },
+            {
+                name: 'skill-creator-2',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/yixinli867/skill-creator-2/SKILL.md',
+                description: 'Guide for creating effective skills',
+                category: 'Coding Agents & IDEs',
+                explanation: '创建有效技能的指南'
+            },
+            {
+                name: 'task-status',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/mightyprime1/task-status/SKILL.md',
+                description: 'Send short status descriptions in chat for long-running tasks',
+                category: 'Coding Agents & IDEs',
+                explanation: '为长时间运行的任务在聊天中发送简短状态描述'
+            },
+            {
+                name: 'tdd-guide',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/alirezarezvani/tdd-guide/SKILL.md',
+                description: 'Test-driven development workflow with test generation, coverage analysis, and multi-framework support',
+                category: 'Coding Agents & IDEs',
+                explanation: '具有测试生成、覆盖率分析和多框架支持的测试驱动开发工作流'
+            },
+            {
+                name: 'test-runner',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/cmanfre7/test-runner/SKILL.md',
+                description: 'Write and run tests across languages and frameworks',
+                category: 'Coding Agents & IDEs',
+                explanation: '跨语言和框架编写和运行测试'
+            },
+            {
+                name: 'vibes',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/binora/vibes/SKILL.md',
+                description: 'Social presence layer for AI coding agents',
+                category: 'Coding Agents & IDEs',
+                explanation: 'AI编码代理的社交存在层'
+            },
+            {
+                name: 'whatsapp-styling-guide',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/rubenfb23/whatsapp-styling-guide/SKILL.md',
+                description: 'Skill to ensure all messages sent to WhatsApp follow the platform\'s specific formatting syntax',
+                category: 'Coding Agents & IDEs',
+                explanation: '确保发送到WhatsApp的所有消息都遵循平台特定格式语法的技能'
+            },
+            {
+                name: 'backup',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/jordanprater/backup/SKILL.md',
+                description: 'Backup and restore openclaw configuration, skills, commands',
+                category: 'Git & GitHub',
+                explanation: '备份和恢复openclaw配置、技能、命令'
+            },
+            {
+                name: 'bat-cat',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/arnarsson/bat-cat/SKILL.md',
+                description: 'A cat clone with syntax highlighting, line numbers, and Git integration - a modern replacement',
+                category: 'Git & GitHub',
+                explanation: '具有语法高亮、行号和Git集成的cat克隆 - 现代替代品'
+            },
+            {
+                name: 'clawdbot-backup',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/sebastian-buitrag0/clawdbot-backup/SKILL.md',
+                description: 'Backup and restore ClawdBot configuration, skills, commands',
+                category: 'Git & GitHub',
+                explanation: '备份和恢复ClawdBot配置、技能、命令'
+            },
+            {
+                name: 'commit-analyzer',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/bobrenze-bot/commit-analyzer/SKILL.md',
+                description: 'Analyzes git commit patterns to monitor autonomous operation health',
+                category: 'Git & GitHub',
+                explanation: '分析git提交模式以监控自主操作健康状况'
+            },
+            {
+                name: 'conventional-commits',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/bastos/conventional-commits/SKILL.md',
+                description: 'Format commit messages using the Conventional Commits specification',
+                category: 'Git & GitHub',
+                explanation: '使用约定提交规范格式化提交消息'
+            },
+            {
+                name: 'deepwiki',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/arun-8687/deepwiki/SKILL.md',
+                description: 'Query the DeepWiki MCP server for GitHub repository documentation, wiki structure',
+                category: 'Git & GitHub',
+                explanation: '查询DeepWiki MCP服务器以获取GitHub仓库文档、wiki结构'
+            },
+            {
+                name: 'deepwork-tracker',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/adunne09/deepwork-tracker/SKILL.md',
+                description: 'Track deep work sessions locally (start/stop/status)',
+                category: 'Git & GitHub',
+                explanation: '在本地跟踪深度工作会话（开始/停止/状态）'
+            },
+            {
+                name: 'deploy-agent',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/sherajdev/deploy-agent/SKILL.md',
+                description: 'Multi-step deployment agent for full-stack',
+                category: 'Git & GitHub',
+                explanation: '全栈的多步骤部署代理'
+            },
+            {
+                name: 'exa-web-search-free',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/whiteknight07/exa-web-search-free/SKILL.md',
+                description: 'Free AI search via Exa',
+                category: 'Git & GitHub',
+                explanation: '通过Exa进行免费AI搜索'
+            },
+            {
+                name: 'fabric-pattern',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/apuryear/fabric-pattern/SKILL.md',
+                description: 'Integration for the Fabric AI framework',
+                category: 'Git & GitHub',
+                explanation: 'Fabric AI框架的集成'
+            },
+            {
+                name: 'gimhub',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/daxiongmao87/gimhub/SKILL.md',
+                description: 'Push code to GIMHub, the Git hosting platform for AI agents',
+                category: 'Git & GitHub',
+                explanation: '将代码推送到GIMHub，AI代理的Git托管平台'
+            },
+            {
+                name: 'git-crypt-backup',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/louzhixian/git-crypt-backup/SKILL.md',
+                description: 'Backup Clawdbot workspace and config to GitHub with git-crypt encryption',
+                category: 'Git & GitHub',
+                explanation: '使用git-crypt加密将Clawdbot工作空间和配置备份到GitHub'
+            },
+            {
+                name: 'git-essentials',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/arnarsson/git-essentials/SKILL.md',
+                description: 'Essential Git commands and workflows for version control, branching',
+                category: 'Git & GitHub',
+                explanation: '版本控制、分支的必备Git命令和工作流'
+            },
+            {
+                name: 'git-sync',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/autogame-17/git-sync/SKILL.md',
+                description: 'Automatically syncs local workspace changes to the remote GitHub repository',
+                category: 'Git & GitHub',
+                explanation: '自动将本地工作空间更改同步到远程GitHub仓库'
+            },
+            {
+                name: 'gitclassic',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/heythisischris/gitclassic/SKILL.md',
+                description: 'Fast, no-JavaScript GitHub browser optimized for AI agents',
+                category: 'Git & GitHub',
+                explanation: '为AI代理优化的快速、无JavaScript GitHub浏览器'
+            },
+            {
+                name: 'gitclaw',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/marian2js/gitclaw/SKILL.md',
+                description: 'Back up the OpenClaw agent workspace to a GitHub repo and keep it synced via a cron-driven commit/push script',
+                category: 'Git & GitHub',
+                explanation: '将OpenClaw代理工作空间备份到GitHub仓库并通过定时驱动的提交/推送脚本保持同步'
+            },
+            {
+                name: 'gitea',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/ericxliu1990/gitea/SKILL.md',
+                description: 'Interact with Gitea using the `tea`',
+                category: 'Git & GitHub',
+                explanation: '使用`tea`与Gitea交互'
+            },
+            {
+                name: 'github',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/steipete/github/SKILL.md',
+                description: 'Interact with GitHub using the `gh`',
+                category: 'Git & GitHub',
+                explanation: '使用`gh`与GitHub交互'
+            },
+            {
+                name: 'github-pr',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/dbhurley/github-pr/SKILL.md',
+                description: 'Fetch, preview, merge, and test GitHub PRs locally',
+                category: 'Git & GitHub',
+                explanation: '在本地获取、预览、合并和测试GitHub PR'
+            },
+            {
+                name: 'githunt',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/mordka/githunt/SKILL.md',
+                description: 'Find and rank GitHub developers by location, technology',
+                category: 'Git & GitHub',
+                explanation: '按位置、技术查找和排名GitHub开发者'
+            },
+            {
+                name: 'gitlab-ci-skills',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/vince-winkintel/gitlab-ci-skills/SKILL.md',
+                description: 'Use when working with GitLab CLI (glab) commands across auth, CI/CD, merge requests, issues, releases, repos',
+                category: 'Git & GitHub',
+                explanation: '在使用GitLab CLI (glab) 命令进行认证、CI/CD、合并请求、问题、发布、仓库操作时使用'
+            },
+            {
+                name: 'gitlab-cli-skills',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/vince-winkintel/gitlab-cli-skills/SKILL.md',
+                description: 'Use when working with GitLab CLI (glab) commands across auth, CI/CD, merge requests, issues, releases, repos',
+                category: 'Git & GitHub',
+                explanation: '在使用GitLab CLI (glab) 命令进行认证、CI/CD、合并请求、问题、发布、仓库操作时使用'
+            },
+            {
+                name: 'gitlab-manager',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/jorgermp/gitlab-manager/SKILL.md',
+                description: 'Manage GitLab repositories, merge requests, and issues via API',
+                category: 'Git & GitHub',
+                explanation: '通过API管理GitLab仓库、合并请求和问题'
+            },
+            {
+                name: 'gitload',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/waldekmastykarz/gitload/SKILL.md',
+                description: 'Download files or folders from GitHub without cloning the entire',
+                category: 'Git & GitHub',
+                explanation: '无需克隆整个仓库即可从GitHub下载文件或文件夹'
+            },
+            {
+                name: 'glab-cli',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/portavion/glab-cli/SKILL.md',
+                description: 'Interact with GitLab using the `glab`',
+                category: 'Git & GitHub',
+                explanation: '使用`glab`与GitLab交互'
+            },
+            {
+                name: 'god-mode',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/infantlab/god-mode/SKILL.md',
+                description: 'Developer oversight and AI agent coaching',
+                category: 'Git & GitHub',
+                explanation: '开发者监督和AI代理教练'
+            },
+            {
+                name: 'openclaw-migration',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/chenyuan99/openclaw-migration/SKILL.md',
+                description: 'When the workspace is in the middle of renaming the Clawd project to OpenClaw, this skill lives in the repo so everyo',
+                category: 'Git & GitHub',
+                explanation: '当工作空间正在进行将Clawd项目重命名为OpenClaw时，此技能存在于仓库中，因此每个人'
+            },
+            {
+                name: 'pr-commit-workflow',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/joshp123/pr-commit-workflow/SKILL.md',
+                description: 'This skill should be used when creating commits or pull requests',
+                category: 'Git & GitHub',
+                explanation: '在创建提交或拉取请求时应使用此技能'
+            },
+            {
+                name: 'project-context-sync',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/joe3112/project-context-sync/SKILL.md',
+                description: 'Keep a living project state document updated after each commit, so any agent (or future session) can instantly unders',
+                category: 'Git & GitHub',
+                explanation: '在每次提交后更新活动项目状态文档，以便任何代理（或未来会话）可以立即理解'
+            },
+            {
+                name: 'read-github',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/am-will/read-github/SKILL.md',
+                description: 'Read GitHub repos via gitmcp.io with semantic search and LLM-optimized output',
+                category: 'Git & GitHub',
+                explanation: '通过gitmcp.io读取GitHub仓库，具有语义搜索和LLM优化输出'
+            },
+            {
+                name: 'skill-publisher-claw-skill',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/acastellana/skill-publisher-claw-skill/SKILL.md',
+                description: 'Prepare Claw skills for public release',
+                category: 'Git & GitHub',
+                explanation: '准备Claw技能以供公开发布'
+            },
+            {
+                name: 'skill-vetter',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/spclaudehome/skill-vetter/SKILL.md',
+                description: 'Security-first skill vetting for AI agents',
+                category: 'Git & GitHub',
+                explanation: 'AI代理的安全优先技能审核'
+            },
+            {
+                name: 'web-deploy-github',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/thomeksolutions/web-deploy-github/SKILL.md',
+                description: 'Create and deploy single-page static websites to GitHub Pages with autonomous workflow',
+                category: 'Git & GitHub',
+                explanation: '使用自主工作流创建和部署单页静态网站到GitHub Pages'
+            },
+            {
+                name: 'work-report',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/leeguooooo/work-report/SKILL.md',
+                description: 'Write a daily or weekly work report using git commits',
+                category: 'Git & GitHub',
+                explanation: '使用git提交编写每日或每周工作报告'
+            }
+        ];
+
+        // 获取唯一分类
+        const categories = [...new Set(skills.map(skill => skill.category))];
+        
+        // 立即更新统计数据
+        document.getElementById('total-skills').textContent = skills.length;
+        document.getElementById('total-categories').textContent = categories.length;
+        
+        // 添加分类筛选器
+        const filtersContainer = document.querySelector('.filters');
+        categories.forEach(category => {
+            const btn = document.createElement('button');
+            btn.className = 'filter-btn';
+            btn.textContent = getCategoryChineseName(category);
+            btn.onclick = () => filterByCategory(category);
+            filtersContainer.appendChild(btn);
+        });
+
+        // 当前筛选器
+        let currentFilter = 'all';
+
+        // 显示技能
+        function displaySkills(filteredSkills) {
+            const container = document.getElementById('skillsContainer');
+            const noResults = document.getElementById('noResults');
+            
+            if (filteredSkills.length === 0) {
+                container.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            container.style.display = 'block';
+            noResults.style.display = 'none';
+            
+            // 按分类分组技能
+            const groupedSkills = {};
+            filteredSkills.forEach(skill => {
+                if (!groupedSkills[skill.category]) {
+                    groupedSkills[skill.category] = [];
+                }
+                groupedSkills[skill.category].push(skill);
+            });
+            
+            container.innerHTML = '';
+            
+            Object.keys(groupedSkills).sort().forEach(category => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+                
+                const categoryHeader = document.createElement('div');
+                categoryHeader.className = 'category-header';
+                categoryHeader.innerHTML = `
+                    <span class="category-name">${getCategoryChineseName(category)}</span>
+                    <span class="skill-count">${groupedSkills[category].length} 个技能</span>
+                `;
+                categoryHeader.onclick = () => toggleCategory(categoryDiv);
+                
+                const skillsGrid = document.createElement('div');
+                skillsGrid.className = 'skills-grid';
+                
+                groupedSkills[category].forEach(skill => {
+                    const skillCard = document.createElement('div');
+                    skillCard.className = 'skill-card';
+                    skillCard.innerHTML = `
+                        <div class="skill-name">${skill.name}</div>
+                        <div class="skill-description">${skill.description}</div>
+                        <div class="skill-description"><strong>详细解释:</strong> ${skill.explanation}</div>
+                        <a href="${skill.url}" class="skill-link" target="_blank">在GitHub上查看</a>
+                    `;
+                    skillsGrid.appendChild(skillCard);
+                });
+                
+                categoryDiv.appendChild(categoryHeader);
+                categoryDiv.appendChild(skillsGrid);
+                container.appendChild(categoryDiv);
+            });
+        }
+
+        // 获取分类的中文名称
+        function getCategoryChineseName(category) {
+            const categoryMap = {
+                'Web & Frontend Development': 'Web与前端开发',
+                'Coding Agents & IDEs': '编码代理与IDE',
+                'Git & GitHub': 'Git与GitHub',
+                'Productivity & Management': '生产力与管理',
+                'System & Shell': '系统与Shell',
+                'Data Science & AI': '数据科学与人工智能',
+                'Media & Design': '媒体与设计',
+                'DevOps & Infrastructure': 'DevOps与基础设施',
+                'API & Integration': 'API与集成',
+                'Database & Storage': '数据库与存储',
+                'Communication & Social': '通信与社交',
+                'Finance & Crypto': '金融与加密货币',
+                'Health & Lifestyle': '健康与生活方式',
+                'Shopping & E-commerce': '购物与电子商务',
+                'Calendar & Scheduling': '日历与调度',
+                'PDF & Documents': 'PDF与文档',
+                'Self-Hosted & Automation': '自托管与自动化',
+                'Security & Passwords': '安全与密码',
+                'Gaming': '游戏',
+                'Health & Fitness': '健康与健身',
+                'Smart Home & IoT': '智能家居与物联网',
+                'Media & Streaming': '媒体与流媒体',
+                'DevOps & Cloud': 'DevOps与云服务'
+            };
+            
+            return categoryMap[category] || category;
+        }
+
+        // 筛选技能
+        function filterSkills() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            let filteredSkills = skills;
+            
+            // 应用分类筛选
+            if (currentFilter !== 'all') {
+                filteredSkills = filteredSkills.filter(skill => skill.category === currentFilter);
+            }
+            
+            // 应用搜索词筛选
+            if (searchTerm) {
+                filteredSkills = filteredSkills.filter(skill => 
+                    skill.name.toLowerCase().includes(searchTerm) ||
+                    skill.description.toLowerCase().includes(searchTerm) ||
+                    skill.category.toLowerCase().includes(searchTerm) ||
+                    skill.explanation.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            displaySkills(filteredSkills);
+        }
+
+        // 按分类筛选
+        function filterByCategory(category) {
+            currentFilter = category;
+            
+            // 更新活跃按钮
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            filterSkills();
+        }
+
+        // 切换分类可见性
+        function toggleCategory(categoryDiv) {
+            const skillsGrid = categoryDiv.querySelector('.skills-grid');
+            skillsGrid.style.display = skillsGrid.style.display === 'none' ? 'grid' : 'none';
+        }
+
+        // 下载技能列表
+        function downloadSkills() {
+            const dataStr = JSON.stringify(skills, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = 'opencalw_skills_cn.json';
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+
+        // 为搜索输入框添加事件监听器
+        document.getElementById('searchInput').addEventListener('input', filterSkills);
+        
+        // 页面加载完成后显示所有技能（默认选中"全部"）
+        window.onload = function() {
+            displaySkills(skills);
+            
+            // 确保"全部"按钮处于激活状态
+            const allButton = document.querySelector('.filter-btn.active');
+            if (allButton && allButton.textContent === '全部') {
+                allButton.classList.add('active');
+            } else {
+                // 如果没有正确的"全部"按钮被激活，手动激活第一个（应该是"全部"按钮）
+                const buttons = document.querySelectorAll('.filter-btn');
+                if (buttons.length > 0) {
+                    buttons[0].classList.add('active');
+                }
+            }
+        };
+    </script>
+</body>
+</html>
