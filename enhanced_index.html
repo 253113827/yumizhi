@@ -1,0 +1,2394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- 基础 Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="yumizhi (玉米知) - OpenClaw 技能集合网站，收录 1600+ AI 技能，支持搜索、收藏、评分。发现、分享和使用 OpenClaw AI 技能。">
+    <meta name="keywords" content="OpenClaw, AI技能, 人工智能, 技能集合, yumizhi, 玉米知, AI工具, 自动化">
+    <meta name="author" content="yumizhi Team">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yumizhi.com/">
+    <meta property="og:title" content="yumizhi (玉米知) - OpenClaw 技能社区">
+    <meta property="og:description" content="发现、分享和使用 OpenClaw AI 技能。收录 1600+ 技能，支持搜索、收藏、评分。">
+    <meta property="og:image" content="https://yumizhi.com/assets/og-image.png">
+    <meta property="og:locale" content="zh_CN">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yumizhi.com/">
+    <meta property="twitter:title" content="yumizhi (玉米知) - OpenClaw 技能社区">
+    <meta property="twitter:description" content="发现、分享和使用 OpenClaw AI 技能。收录 1600+ 技能，支持搜索、收藏、评分。">
+    <meta property="twitter:image" content="https://yumizhi.com/assets/og-image.png">
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="yumizhi">
+
+    <!-- 结构化数据 - JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "yumizhi (玉米知)",
+      "url": "https://yumizhi.com",
+      "description": "OpenClaw 技能集合网站，收录 1600+ AI 技能",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://yumizhi.com/skills.html?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- 预连接和 DNS 预解析 -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yumizhi.com/">
+
+    <title>yumizhi (玉米知) - OpenClaw技能集合</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border-radius: 10px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.2rem;
+        }
+
+        .logo-chinese {
+            font-size: 1.3rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logo-english {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: normal;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #218838;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .search-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box:focus {
+            border-color: #667eea;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #e9ecef;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .categories {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .category {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .skill-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .skill-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 0.8rem;
+        }
+
+        .skill-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            transition: background 0.3s ease;
+        }
+
+        .skill-link:hover {
+            background: #5a6fd8;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .toggle-category {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .download-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .download-btn, .language-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .download-btn:hover, .language-btn:hover {
+            background: #218838;
+        }
+
+        .language-selector {
+            margin-top: 1rem;
+        }
+
+        .feature-intro {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+
+        .page-btn {
+            padding: 8px 15px;
+            background: #e9ecef;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .page-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .page-btn:hover:not(.active) {
+            background: #667eea;
+            color: white;
+        }
+
+        /* 弹出登录框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .modal-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .modal-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .modal-footer {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .modal-footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        /* 用户信息栏 */
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* 登录/注册按钮容器 */
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* 用户菜单下拉 */
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            width: 200px;
+            z-index: 1001;
+            display: none;
+        }
+
+        .user-dropdown.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            color: #333;
+            transition: background 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background: #f8f9fa;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #e9ecef;
+            margin: 0.5rem 0;
+        }
+
+        /* 热门技能轮播 */
+        .trending-carousel {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .trending-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .trending-title {
+            font-size: 1.4rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .trending-items {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 1rem 0;
+        }
+
+        .trending-item {
+            min-width: 250px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .trending-name {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .trending-desc {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .trending-stats {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .trending-stats span {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        /* 评分组件样式 */
+        .rating-component {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .rating-stars {
+            display: flex;
+            gap: 2px;
+        }
+
+        .star {
+            font-size: 18px;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .star.filled {
+            color: #ffc107;
+        }
+
+        .star.user-rated {
+            color: #ff9800;
+        }
+
+        .star.hover {
+            color: #ffc107;
+        }
+
+        .rating-info {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .rating-info .average {
+            font-weight: bold;
+            color: #ffc107;
+            margin-right: 5px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4caf50;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translate(-50%, 20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        /* 评论组件样式 */
+        .comment-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .comment-title {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .comment-input-area {
+            margin-bottom: 15px;
+        }
+
+        .comment-input-area textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            resize: vertical;
+            min-height: 60px;
+            font-family: inherit;
+            font-size: 13px;
+        }
+
+        .comment-input-area button {
+            margin-top: 8px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .comment-input-area button:hover {
+            opacity: 0.9;
+        }
+
+        .comment-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .no-comments {
+            text-align: center;
+            color: #999;
+            padding: 30px 20px;
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        .comment-item {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .comment-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .comment-header .avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .comment-header .username {
+            font-weight: bold;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .comment-header .date {
+            color: #999;
+            font-size: 11px;
+            margin-left: auto;
+        }
+
+        .comment-content {
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .comment-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .comment-actions button {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .comment-actions button:hover {
+            background: #f0f0f0;
+        }
+
+        .comment-actions .like-btn.liked {
+            color: #e91e63;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+            
+            .logo {
+                align-items: center;
+            }
+            
+            .nav-menu {
+                justify-content: center;
+                gap: 0.8rem;
+                flex-wrap: wrap;
+            }
+            
+            .nav-link {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .user-menu {
+                justify-content: center;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .trending-items {
+                flex-direction: column;
+            }
+            
+            .trending-item {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-chinese">玉米知</div>
+                <div class="logo-english">yumizhi.com</div>
+            </div>
+            <div class="nav-menu">
+                <a href="/" class="nav-link active"><i class="fas fa-home"></i> 首页</a>
+                <a href="/skills" class="nav-link"><i class="fas fa-th-large"></i> 技能分类</a>
+                <a href="/trending" class="nav-link"><i class="fas fa-fire"></i> 热门技能</a>
+                <a href="/user-center" class="nav-link"><i class="fas fa-user-circle"></i> 个人中心</a>
+                <a href="/about" class="nav-link"><i class="fas fa-info-circle"></i> 关于我们</a>
+                <a href="/help" class="nav-link"><i class="fas fa-question-circle"></i> 帮助中心</a>
+            </div>
+            <div class="user-menu">
+                <!-- 登录前显示登录注册按钮 -->
+                <div id="auth-buttons" class="auth-buttons">
+                    <button class="btn btn-outline" onclick="openLoginModal()"><i class="fas fa-sign-in-alt"></i> 登录</button>
+                    <button class="btn btn-primary" onclick="openRegisterModal()"><i class="fas fa-user-plus"></i> 注册</button>
+                </div>
+                
+                <!-- 登录后显示用户信息（默认隐藏） -->
+                <div id="user-info" class="user-info" style="display: none;" onclick="toggleUserDropdown()">
+                    <div class="user-avatar">U</div>
+                    <span>用户名</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                
+                <!-- 用户下拉菜单 -->
+                <div id="user-dropdown" class="user-dropdown">
+                    <a href="/user-center" class="dropdown-item"><i class="fas fa-user"></i> 个人中心</a>
+                    <a href="/user-center#profile" class="dropdown-item"><i class="fas fa-cog"></i> 账户设置</a>
+                    <a href="/user-center#collections" class="dropdown-item"><i class="fas fa-bookmark"></i> 我的收藏</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i> 退出登录</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="trending-carousel">
+            <div class="trending-header">
+                <div class="trending-title">🔥 热门技能</div>
+                <a href="/trending" class="nav-link"><i class="fas fa-arrow-right"></i> 更多</a>
+            </div>
+            <div class="trending-items">
+                <div class="trending-item">
+                    <div class="trending-name">artifacts-builder</div>
+                    <div class="trending-desc">用于使用现代前端网络技术创建复杂、多组件 claude.ai HTML 工件的工具套件</div>
+                    <div class="trending-stats">
+                        <span><i class="fas fa-star"></i> 4.8</span>
+                        <span><i class="fas fa-download"></i> 1.2k</span>
+                        <span><i class="fas fa-heart"></i> 89</span>
+                    </div>
+                </div>
+                <div class="trending-item">
+                    <div class="trending-name">comfy-ai</div>
+                    <div class="trending-desc">与本地ComfyUI实例集成以从文本生成图像（txt2img）和编辑</div>
+                    <div class="trending-stats">
+                        <span><i class="fas fa-star"></i> 4.7</span>
+                        <span><i class="fas fa-download"></i> 956</span>
+                        <span><i class="fas fa-heart"></i> 76</span>
+                    </div>
+                </div>
+                <div class="trending-item">
+                    <div class="trending-name">coding-agent</div>
+                    <div class="trending-desc">运行Codex CLI、Claude Code、OpenCode或Pi编码代理</div>
+                    <div class="trending-stats">
+                        <span><i class="fas fa-star"></i> 4.6</span>
+                        <span><i class="fas fa-download"></i> 823</span>
+                        <span><i class="fas fa-heart"></i> 64</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <header>
+            <h1>yumizhi (玉米知)</h1>
+            <p class="subtitle">发现 1715+ 社区构建的 OpenClaw 技能，按类别组织</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="total-skills">1715</span>
+                    <span>总技能数</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="total-categories">31</span>
+                    <span>类别数</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="total-users">2,847</span>
+                    <span>活跃用户</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="total-favorites">15,234</span>
+                    <span>收藏次数</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="feature-intro">
+            <h2>功能介绍</h2>
+            <p>OpenClaw技能集合是一个综合性的AI技能索引，收录了社区贡献的各种实用技能，涵盖Web开发、AI代理、Git管理、系统运维等多个领域。</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-title">🔍 智能搜索</div>
+                    <p>通过技能名称、描述或类别快速查找所需技能</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">🏷️ 分类浏览</div>
+                    <p>按类别筛选技能，便于发现相关功能</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">📋 详细说明</div>
+                    <p>每个技能都有详细的中文解释和使用场景</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">⭐ 评分评论</div>
+                    <p>用户可以对技能进行评分和评论，帮助选择</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">🔖 收藏功能</div>
+                    <p>收藏喜欢的技能，方便日后查找使用</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-title">👤 个人中心</div>
+                    <p>管理个人资料、收藏、评论和评分</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h2>下载技能列表</h2>
+            <p>点击下方按钮下载完整的技能列表文件</p>
+            <button class="download-btn" onclick="downloadSkills()">下载技能列表 (JSON格式)</button>
+            
+            <div class="language-selector">
+                <p>语言切换：</p>
+                <a href="/english.html" class="language-btn">English Version</a>
+                <a href="/" class="language-btn">中文版</a>
+            </div>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-box" placeholder="按名称、描述或类别搜索技能...">
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterByCategory('all')">全部</button>
+                <!-- 分类筛选将动态添加 -->
+            </div>
+        </div>
+
+        <div id="skillsContainer" class="categories">
+            <!-- 技能将动态填充 -->
+        </div>
+
+        <div id="noResults" class="no-results" style="display: none;">
+            <h3>未找到技能</h3>
+            <p>请尝试调整搜索关键词</p>
+        </div>
+
+        <div class="pagination" id="pagination">
+            <!-- 分页按钮将动态添加 -->
+        </div>
+    </div>
+
+    <!-- 登录弹窗 -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2 style="margin-bottom: 1.5rem; text-align: center;">用户登录</h2>
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="请输入邮箱地址" id="loginEmail">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="请输入密码" id="loginPassword">
+            </div>
+            <button class="modal-btn" onclick="performLogin()">登录</button>
+            <div class="modal-footer">
+                <p>还没有账号？ <a href="#" onclick="openRegisterModal(); closeLoginModal();">立即注册</a></p>
+                <p><a href="#">忘记密码？</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 注册弹窗 -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRegisterModal()">&times;</span>
+            <h2 style="margin-bottom: 1.5rem; text-align: center;">用户注册</h2>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="请输入用户名" id="registerUsername">
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="请输入邮箱地址" id="registerEmail">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="请输入密码" id="registerPassword">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="请再次输入密码" id="confirmPassword">
+            </div>
+            <button class="modal-btn" onclick="performRegister()">注册</button>
+            <div class="modal-footer">
+                <p>已有账号？ <a href="#" onclick="openLoginModal(); closeRegisterModal();">立即登录</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // API 客户端
+        const API_BASE_URL = 'https://api.yumizhi.com' || 'http://localhost:3001';
+
+        // 获取 token
+        function getToken() {
+            return localStorage.getItem('yumizhi_token');
+        }
+
+        // 设置 token
+        function setToken(token) {
+            localStorage.setItem('yumizhi_token', token);
+        }
+
+        // 清除 token
+        function clearToken() {
+            localStorage.removeItem('yumizhi_token');
+        }
+
+        // API 请求封装
+        async function apiRequest(endpoint, options = {}) {
+            const url = `${API_BASE_URL}${endpoint}`;
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...options.headers
+                },
+                ...options
+            };
+            
+            const token = getToken();
+            if (token) {
+                config.headers['Authorization'] = `Bearer ${token}`;
+            }
+            
+            try {
+                const response = await fetch(url, config);
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Request failed');
+                }
+                
+                return data;
+            } catch (error) {
+                console.error('API Error:', error);
+                throw error;
+            }
+        }
+
+        // 用户认证 API
+        const AuthAPI = {
+            register: (username, email, password) => 
+                apiRequest('/api/auth/register', {
+                    method: 'POST',
+                    body: JSON.stringify({ username, email, password })
+                }),
+            
+            login: (email, password) => 
+                apiRequest('/api/auth/login', {
+                    method: 'POST',
+                    body: JSON.stringify({ email, password })
+                }),
+            
+            getMe: () => apiRequest('/api/auth/me'),
+            
+            updateProfile: (data) => 
+                apiRequest('/api/auth/profile', {
+                    method: 'PUT',
+                    body: JSON.stringify(data)
+                }),
+            
+            syncFavorites: (favorites) => 
+                apiRequest('/api/auth/favorites/sync', {
+                    method: 'POST',
+                    body: JSON.stringify({ favorites })
+                })
+        };
+
+        // 评分 API
+        const RatingAPI = {
+            submit: (skillId, rating) => 
+                apiRequest('/api/ratings', {
+                    method: 'POST',
+                    body: JSON.stringify({ skillId, rating })
+                }),
+            
+            getBySkill: (skillId) => 
+                apiRequest(`/api/ratings/${skillId}`),
+            
+            getUserRating: (skillId) => 
+                apiRequest(`/api/ratings/${skillId}/user`)
+        };
+
+        // 评论 API
+        const CommentAPI = {
+            create: (skillId, content) => 
+                apiRequest('/api/comments', {
+                    method: 'POST',
+                    body: JSON.stringify({ skillId, content })
+                }),
+            
+            getBySkill: (skillId, page = 1, limit = 10) => 
+                apiRequest(`/api/comments/${skillId}?page=${page}&limit=${limit}`),
+            
+            like: (commentId) => 
+                apiRequest(`/api/comments/${commentId}/like`, {
+                    method: 'POST'
+                }),
+            
+            reply: (commentId, content) => 
+                apiRequest(`/api/comments/${commentId}/reply`, {
+                    method: 'POST',
+                    body: JSON.stringify({ content })
+                })
+        };
+
+        // 评分组件
+        class RatingComponent {
+            constructor(containerId, skillId) {
+                this.container = document.getElementById(containerId);
+                this.skillId = skillId;
+                this.userRating = 0;
+                this.averageRating = 0;
+                this.ratingCount = 0;
+                this.init();
+            }
+            
+            async init() {
+                await this.loadRating();
+                this.render();
+            }
+            
+            async loadRating() {
+                try {
+                    // 获取平均评分
+                    const stats = await RatingAPI.getBySkill(this.skillId);
+                    this.averageRating = parseFloat(stats.average);
+                    this.ratingCount = stats.count;
+                    
+                    // 获取用户评分（如果已登录）
+                    const token = getToken();
+                    if (token) {
+                        const userData = await RatingAPI.getUserRating(this.skillId);
+                        this.userRating = userData.rating;
+                    }
+                } catch (error) {
+                    console.error('Failed to load rating:', error);
+                }
+            }
+            
+            render() {
+                if (!this.container) return;
+                
+                this.container.innerHTML = `
+                    <div class="rating-component">
+                        <div class="rating-stars">
+                            ${this.renderStars()}
+                        </div>
+                        <div class="rating-info">
+                            <span class="average">${this.averageRating.toFixed(1)}</span>
+                            <span class="count">(${this.ratingCount} 评价)</span>
+                        </div>
+                    </div>
+                `;
+                
+                this.attachEvents();
+            }
+            
+            renderStars() {
+                let stars = '';
+                for (let i = 1; i <= 5; i++) {
+                    const filled = i <= Math.round(this.averageRating);
+                    const userFilled = i <= this.userRating;
+                    stars += `
+                        <span class="star ${filled ? 'filled' : ''} ${userFilled ? 'user-rated' : ''}" 
+                              data-rating="${i}" 
+                              title="${i} 星">
+                            ★
+                        </span>
+                    `;
+                }
+                return stars;
+            }
+            
+            attachEvents() {
+                const stars = this.container.querySelectorAll('.star');
+                stars.forEach(star => {
+                    // 悬停效果
+                    star.addEventListener('mouseenter', () => {
+                        const rating = parseInt(star.dataset.rating);
+                        this.highlightStars(rating);
+                    });
+                    
+                    // 点击提交评分
+                    star.addEventListener('click', async () => {
+                        await this.submitRating(parseInt(star.dataset.rating));
+                    });
+                });
+                
+                // 鼠标离开恢复原状
+                this.container.querySelector('.rating-stars').addEventListener('mouseleave', () => {
+                    this.render();
+                });
+            }
+            
+            highlightStars(rating) {
+                const stars = this.container.querySelectorAll('.star');
+                stars.forEach((star, index) => {
+                    if (index < rating) {
+                        star.classList.add('hover');
+                    } else {
+                        star.classList.remove('hover');
+                    }
+                });
+            }
+            
+            async submitRating(rating) {
+                const token = getToken();
+                if (!token) {
+                    alert('请先登录后再评分！');
+                    return;
+                }
+                
+                try {
+                    const result = await RatingAPI.submit(this.skillId, rating);
+                    this.userRating = rating;
+                    this.averageRating = parseFloat(result.average);
+                    this.ratingCount = result.count;
+                    this.render();
+                    
+                    // 显示成功提示
+                    this.showToast('评分成功！');
+                } catch (error) {
+                    alert('评分失败：' + error.message);
+                }
+            }
+            
+            showToast(message) {
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 2000);
+            }
+        }
+
+        // 评论组件
+        class CommentComponent {
+            constructor(containerId, skillId) {
+                this.container = document.getElementById(containerId);
+                this.skillId = skillId;
+                this.comments = [];
+                this.page = 1;
+                this.limit = 10;
+                this.hasMore = true;
+                this.init();
+            }
+            
+            async init() {
+                await this.loadComments();
+                this.render();
+            }
+            
+            async loadComments() {
+                try {
+                    const data = await CommentAPI.getBySkill(this.skillId, this.page, this.limit);
+                    this.comments = data.comments;
+                    this.hasMore = this.page < data.pagination.pages;
+                } catch (error) {
+                    console.error('Failed to load comments:', error);
+                }
+            }
+            
+            render() {
+                if (!this.container) return;
+                
+                this.container.innerHTML = `
+                    <div class="comment-section">
+                        <h3 class="comment-title">💬 用户评论 (${this.comments.length})</h3>
+                        
+                        <!-- 评论输入框 -->
+                        <div class="comment-input-area">
+                            <textarea id="comment-input-${this.skillId}" 
+                                      placeholder="分享你对这个技能的看法..." 
+                                      maxlength="1000"></textarea>
+                            <button onclick="commentComponents['${this.skillId}'].submitComment()">
+                                发表评论
+                            </button>
+                        </div>
+                        
+                        <!-- 评论列表 -->
+                        <div class="comment-list">
+                            ${this.comments.length === 0 ? 
+                                '<div class="no-comments">暂无评论，来发表第一条评论吧！</div>' : 
+                                this.comments.map(c => this.renderComment(c)).join('')
+                            }
+                        </div>
+                        
+                        ${this.hasMore ? `
+                            <button class="load-more" onclick="commentComponents['${this.skillId}'].loadMore()">
+                                加载更多
+                            </button>
+                        ` : ''}
+                    </div>
+                `;
+            }
+            
+            renderComment(comment) {
+                const date = new Date(comment.createdAt).toLocaleDateString('zh-CN');
+                return `
+                    <div class="comment-item" data-id="${comment.id}">
+                        <div class="comment-header">
+                            <img src="${comment.avatar || 'default-avatar.png'}" alt="${comment.username}" class="avatar">
+                            <span class="username">${comment.username}</span>
+                            <span class="date">${date}</span>
+                        </div>
+                        <div class="comment-content">${this.escapeHtml(comment.content)}</div>
+                        <div class="comment-actions">
+                            <button onclick="commentComponents['${this.skillId}'].toggleLike('${comment.id}')" 
+                                    class="like-btn ${comment.liked ? 'liked' : ''}">
+                                ❤️ ${comment.likes}
+                            </button>
+                            <button onclick="commentComponents['${this.skillId}'].showReplyForm('${comment.id}')">
+                                回复
+                            </button>
+                        </div>
+                        
+                        <!-- 回复列表 -->
+                        ${comment.replies?.length ? `
+                            <div class="replies">
+                                ${comment.replies.map(r => this.renderReply(r)).join('')}
+                            </div>
+                        ` : ''}
+                        
+                        <!-- 回复输入框 -->
+                        <div class="reply-form" id="reply-form-${comment.id}" style="display: none;">
+                            <textarea placeholder="回复 ${comment.username}..." maxlength="500"></textarea>
+                            <button onclick="commentComponents['${this.skillId}'].submitReply('${comment.id}')">发送</button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            renderReply(reply) {
+                const date = new Date(reply.createdAt).toLocaleDateString('zh-CN');
+                return `
+                    <div class="reply-item">
+                        <img src="${reply.avatar || 'default-avatar.png'}" alt="${reply.username}" class="avatar small">
+                        <div class="reply-content">
+                            <span class="username">${reply.username}</span>
+                            <span class="text">${this.escapeHtml(reply.content)}</span>
+                            <span class="date">${date}</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            async submitComment() {
+                const token = getToken();
+                if (!token) {
+                    alert('请先登录后再评论！');
+                    return;
+                }
+                
+                const input = document.getElementById(`comment-input-${this.skillId}`);
+                const content = input.value.trim();
+                
+                if (!content) {
+                    alert('请输入评论内容');
+                    return;
+                }
+                
+                try {
+                    await CommentAPI.create(this.skillId, content);
+                    input.value = '';
+                    this.page = 1;
+                    await this.loadComments();
+                    this.render();
+                    this.showToast('评论发表成功！');
+                } catch (error) {
+                    alert('评论失败：' + error.message);
+                }
+            }
+            
+            async toggleLike(commentId) {
+                const token = getToken();
+                if (!token) {
+                    alert('请先登录后再点赞！');
+                    return;
+                }
+                
+                try {
+                    const result = await CommentAPI.like(commentId);
+                    
+                    // 更新 UI
+                    const comment = this.comments.find(c => c.id === commentId);
+                    if (comment) {
+                        comment.likes = result.likes;
+                        comment.liked = result.liked;
+                        this.render();
+                    }
+                } catch (error) {
+                    console.error('Like failed:', error);
+                }
+            }
+            
+            showReplyForm(commentId) {
+                const form = document.getElementById(`reply-form-${commentId}`);
+                form.style.display = form.style.display === 'none' ? 'block' : 'none';
+            }
+            
+            async submitReply(commentId) {
+                const token = getToken();
+                if (!token) {
+                    alert('请先登录后再回复！');
+                    return;
+                }
+                
+                const form = document.getElementById(`reply-form-${commentId}`);
+                const textarea = form.querySelector('textarea');
+                const content = textarea.value.trim();
+                
+                if (!content) {
+                    alert('请输入回复内容');
+                    return;
+                }
+                
+                try {
+                    await CommentAPI.reply(commentId, content);
+                    await this.loadComments();
+                    this.render();
+                    this.showToast('回复成功！');
+                } catch (error) {
+                    alert('回复失败：' + error.message);
+                }
+            }
+            
+            async loadMore() {
+                this.page++;
+                try {
+                    const data = await CommentAPI.getBySkill(this.skillId, this.page, this.limit);
+                    this.comments = [...this.comments, ...data.comments];
+                    this.hasMore = this.page < data.pagination.pages;
+                    this.render();
+                } catch (error) {
+                    console.error('Load more failed:', error);
+                }
+            }
+            
+            showToast(message) {
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 2000);
+            }
+        }
+
+        // 全局评论组件管理器
+        window.commentComponents = {};
+        window.RatingComponent = RatingComponent;
+        window.CommentComponent = CommentComponent;
+
+        // 技能数据
+        const skills = [
+            {
+                name: 'artifacts-builder',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/seanphan/artifacts-builder/SKILL.md',
+                description: 'Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web',
+                category: 'Web & Frontend Development',
+                explanation: '用于使用现代前端网络技术创建复杂、多组件 claude.ai HTML 工件的工具套件',
+                rating: 4.8,
+                downloads: 1200,
+                favorites: 89
+            },
+            {
+                name: 'claw-shell',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/imaginelogo/claw-shell/SKILL.md',
+                description: 'ALWAYS USES TMUX SESSION `claw`',
+                category: 'Web & Frontend Development',
+                explanation: '始终使用TMUX会话`claw`',
+                rating: 4.5,
+                downloads: 850,
+                favorites: 67
+            },
+            {
+                name: 'clawdbot-zoho-email',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/briansmith80/clawdbot-zoho-email/SKILL.md',
+                description: 'Complete Zoho Mail integration with OAuth2, REST API (5-10x faster), HTML emails, attachments',
+                category: 'Web & Frontend Development',
+                explanation: '使用OAuth2、REST API（快5-10倍）、HTML邮件、附件的完整Zoho Mail集成',
+                rating: 4.6,
+                downloads: 720,
+                favorites: 54
+            },
+            {
+                name: 'comfy-ai',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/tullyhu/comfy-ai/SKILL.md',
+                description: 'Integrates with local ComfyUI instance at http://192.168.31.7:8000 to generate images from text (txt2img) and edit',
+                category: 'Web & Frontend Development',
+                explanation: '与本地ComfyUI实例集成以从文本生成图像（txt2img）和编辑',
+                rating: 4.7,
+                downloads: 956,
+                favorites: 76
+            },
+            {
+                name: 'comfyui-runner',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/xtopher86/comfyui-runner/SKILL.md',
+                description: 'Start/stop/status for a ComfyUI instance',
+                category: 'Web & Frontend Development',
+                explanation: 'ComfyUI实例的启动/停止/状态',
+                rating: 4.4,
+                downloads: 630,
+                favorites: 42
+            },
+            {
+                name: 'computer-use',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/ram-raghav-s/computer-use/SKILL.md',
+                description: 'Full desktop computer use for headless Linux servers',
+                category: 'Web & Frontend Development',
+                explanation: '无头Linux服务器的完整桌面计算机使用',
+                rating: 4.3,
+                downloads: 580,
+                favorites: 38
+            },
+            {
+                name: 'deliberate-frontend-redesign',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/vishnubedi3/deliberate-frontend-redesign/SKILL.md) - [discord](https://github.com/openclaw/skills/tree/main/skills/steipete/discord/SKILL.md',
+                description: 'Use when you need to control Discord from Clawdbot via the discord tool: send messages, react',
+                category: 'Web & Frontend Development',
+                explanation: '当您需要通过discord工具从Clawdbot控制Discord时使用：发送消息、反应',
+                rating: 4.2,
+                downloads: 490,
+                favorites: 35
+            },
+            {
+                name: 'downloads',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/gxsy886/downloads/SKILL.md',
+                description: 'Create distinctive, production-grade frontend interfaces with high design quality',
+                category: 'Web & Frontend Development',
+                explanation: '创建具有高设计质量的独特、生产级前端界面',
+                rating: 4.7,
+                downloads: 780,
+                favorites: 62
+            },
+            {
+                name: 'emporia-energy',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/urosorozel/emporia-energy/SKILL.md',
+                description: 'Direct Emporia Vue energy queries via Emporia cloud (PyEmVue) or local ESPHome API',
+                category: 'Web & Frontend Development',
+                explanation: '通过Emporia云（PyEmVue）或本地ESPHome API直接查询Emporia Vue能源数据',
+                rating: 4.1,
+                downloads: 320,
+                favorites: 24
+            },
+            {
+                name: 'fanvue',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/igorls/fanvue/SKILL.md',
+                description: 'Manage content, chats, subscribers, and earnings on the Fanvue creator platform via OAuth 2.0 API',
+                category: 'Web & Frontend Development',
+                explanation: '通过OAuth 2.0 API管理Fanvue创作者平台上的内容、聊天、订阅者和收入',
+                rating: 4.5,
+                downloads: 450,
+                favorites: 31
+            },
+            {
+                name: 'frontend-design',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/steipete/frontend-design/SKILL.md',
+                description: 'Create distinctive, production-grade frontend interfaces with high design quality',
+                category: 'Web & Frontend Development',
+                explanation: '创建具有高设计质量的独特、生产级前端界面',
+                rating: 4.8,
+                downloads: 890,
+                favorites: 78
+            },
+            {
+                name: 'giphy',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/minbang930/giphy/SKILL.md',
+                description: 'Search and send contextual GIFs from Giphy in Discord conversations',
+                category: 'Web & Frontend Development',
+                explanation: '在Discord对话中搜索和发送情境相关的GIF',
+                rating: 4.0,
+                downloads: 290,
+                favorites: 19
+            },
+            {
+                name: 'human-optimized-frontend',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/vishnubedi3/human-optimized-frontend/SKILL.md) - [linux-service-triage](https://github.com/openclaw/skills/tree/main/skills/kowl64/linux-service-triage/SKILL.md',
+                description: 'Diagnoses common Linux service issues using logs, systemd/PM2, file permissions',
+                category: 'Web & Frontend Development',
+                explanation: '使用日志、systemd/PM2、文件权限诊断常见的Linux服务问题',
+                rating: 4.4,
+                downloads: 560,
+                favorites: 45
+            },
+            {
+                name: 'miniflux-news',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/hartlco/miniflux-news/SKILL.md',
+                description: 'Fetch and triage the latest unread RSS/news entries from a Miniflux instance',
+                category: 'Web & Frontend Development',
+                explanation: '从Miniflux实例获取和筛选最新的未读RSS/新闻条目',
+                rating: 4.6,
+                downloads: 670,
+                favorites: 52
+            },
+            {
+                name: 'nextjs-expert',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/jgarrison929/nextjs-expert/SKILL.md',
+                description: 'Use when building Next.js 14/15 applications with the App Router',
+                category: 'Web & Frontend Development',
+                explanation: '在使用App Router构建Next.js 14/15应用程序时使用',
+                rating: 4.9,
+                downloads: 1020,
+                favorites: 91
+            },
+            {
+                name: 'niri-ipc',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/atefr/niri-ipc/SKILL.md',
+                description: 'Control the Niri Wayland compositor on Linux via its IPC (`niri msg --json` / $NIRI_SOCKET)',
+                category: 'Web & Frontend Development',
+                explanation: '通过IPC（`niri msg --json` / $NIRI_SOCKET）控制Linux上的Niri Wayland合成器',
+                rating: 4.2,
+                downloads: 410,
+                favorites: 28
+            },
+            {
+                name: 'nodetool',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/georgi/nodetool/SKILL.md',
+                description: 'Visual AI workflow builder - ComfyUI meets n8n for LLM agents, RAG pipelines, and multimodal data flows',
+                category: 'Web & Frontend Development',
+                explanation: '可视化AI工作流构建器 - ComfyUI与n8n结合用于LLM代理、RAG管道和多模态数据流',
+                rating: 4.7,
+                downloads: 750,
+                favorites: 69
+            },
+            {
+                name: 'pinak-frontend-guru',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/sharanga10/pinak-frontend-guru/SKILL.md',
+                description: 'Expert UI/UX and React performance auditor (PinakBot persona)',
+                category: 'Web & Frontend Development',
+                explanation: '专家UI/UX和React性能审计员（PinakBot角色）',
+                rating: 4.5,
+                downloads: 620,
+                favorites: 48
+            },
+            {
+                name: 'react-email-skills',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/christina-de-martinez/react-email-skills/SKILL.md',
+                description: 'Create beautiful, responsive HTML emails using React components with React Email',
+                category: 'Web & Frontend Development',
+                explanation: '使用React组件和React Email创建美观、响应式的HTML电子邮件',
+                rating: 4.6,
+                downloads: 580,
+                favorites: 53
+            },
+            {
+                name: 'remotion-best-practices',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/am-will/remotion-best-practices/SKILL.md',
+                description: 'Best practices for Remotion - Video creation in React',
+                category: 'Web & Frontend Development',
+                explanation: 'Remotion的最佳实践 - 在React中创建视频',
+                rating: 4.3,
+                downloads: 430,
+                favorites: 34
+            },
+            {
+                name: 'remotion-server',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/mvanhorn/remotion-server/SKILL.md',
+                description: 'Headless video rendering with Remotion',
+                category: 'Web & Frontend Development',
+                explanation: '使用Remotion进行无头视频渲染',
+                rating: 4.4,
+                downloads: 390,
+                favorites: 31
+            },
+            {
+                name: 'remotion-video-toolkit',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/shreefentsar/remotion-video-toolkit/SKILL.md',
+                description: 'Complete toolkit for programmatic video creation with Remotion + React',
+                category: 'Web & Frontend Development',
+                explanation: '使用Remotion + React进行程序化视频创建的完整工具包',
+                rating: 4.6,
+                downloads: 510,
+                favorites: 42
+            },
+            {
+                name: 'resume-builder',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/amruthpillai/resume-builder/SKILL.md',
+                description: 'Generate professional resumes that conform to the Reactive Resume schema',
+                category: 'Web & Frontend Development',
+                explanation: '生成符合Reactive Resume模式的专业简历',
+                rating: 4.7,
+                downloads: 680,
+                favorites: 57
+            },
+            {
+                name: 'senior-fullstack',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/alirezarezvani/senior-fullstack/SKILL.md',
+                description: 'Fullstack development toolkit with project scaffolding for Next.js/FastAPI/MERN/Django stacks and code quality',
+                category: 'Web & Frontend Development',
+                explanation: '带有项目脚手架的全栈开发工具包，支持Next.js/FastAPI/MERN/Django堆栈和代码质量',
+                rating: 4.8,
+                downloads: 920,
+                favorites: 83
+            },
+            {
+                name: 'slack',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/steipete/slack/SKILL.md',
+                description: 'Use when you need to control Slack from Clawdbot via the Slack tool',
+                category: 'Web & Frontend Development',
+                explanation: '当您需要通过Slack工具从Clawdbot控制Slack时使用',
+                rating: 4.2,
+                downloads: 540,
+                favorites: 41
+            },
+            {
+                name: 'smtp-send',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/xiwan/smtp-send/SKILL.md',
+                description: 'Send emails via SMTP with support for plain text, HTML',
+                category: 'Web & Frontend Development',
+                explanation: '通过SMTP发送邮件，支持纯文本、HTML',
+                rating: 4.1,
+                downloads: 460,
+                favorites: 33
+            },
+            {
+                name: 'technews',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/kesslerio/technews/SKILL.md',
+                description: 'Fetches top stories from TechMeme, summarizes linked articles, and highlights social media reactions',
+                category: 'Web & Frontend Development',
+                explanation: '获取TechMeme的热门故事，总结链接文章，并突出社交媒体反应',
+                rating: 4.5,
+                downloads: 610,
+                favorites: 49
+            },
+            {
+                name: 'telegram-reaction-prober',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/deadlysilent/telegram-reaction-prober/SKILL.md',
+                description: 'Probe which emoji reactions are accepted in a specific Telegram chat/message, record an allow/deny list',
+                category: 'Web & Frontend Development',
+                explanation: '探测特定Telegram聊天/消息接受的emoji反应，记录允许/拒绝列表',
+                rating: 4.0,
+                downloads: 380,
+                favorites: 26
+            },
+            {
+                name: 'trmnl',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/peetzweg/trmnl/SKILL.md',
+                description: 'Generate content for TRMNL e-ink display devices using the TRMNL CSS framework',
+                category: 'Web & Frontend Development',
+                explanation: '使用TRMNL CSS框架为TRMNL电子墨水显示屏设备生成内容',
+                rating: 4.3,
+                downloads: 420,
+                favorites: 32
+            },
+            {
+                name: 'ui-audit',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/tommygeoco/ui-audit/SKILL.md',
+                description: 'AI skill for automated UI audits',
+                category: 'Web & Frontend Development',
+                explanation: '用于自动UI审核的AI技能',
+                rating: 4.4,
+                downloads: 530,
+                favorites: 44
+            },
+            {
+                name: 'ui-design-system',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/alirezarezvani/ui-design-system/SKILL.md',
+                description: 'UI design system toolkit for Senior UI Designer including design token generation, component documentation',
+                category: 'Web & Frontend Development',
+                explanation: '高级UI设计师的UI设计系统工具包，包括设计令牌生成、组件文档',
+                rating: 4.7,
+                downloads: 760,
+                favorites: 65
+            },
+            {
+                name: 'ui-skills',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/correctroadh/ui-skills/SKILL.md',
+                description: 'Opinionated constraints for building better interfaces with agents',
+                category: 'Web & Frontend Development',
+                explanation: '使用代理构建更好界面的意见性约束',
+                rating: 4.2,
+                downloads: 480,
+                favorites: 37
+            },
+            {
+                name: 'ui-ux-master',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/kdbhalala/ui-ux-master/SKILL.md',
+                description: 'Master UI/UX design skill combining Apple HIG, modern web design, SuperDesign patterns',
+                category: 'Web & Frontend Development',
+                explanation: '结合Apple HIG、现代网络设计、SuperDesign模式的主UI/UX设计技能',
+                rating: 4.8,
+                downloads: 840,
+                favorites: 74
+            },
+            {
+                name: 'ui-ux-pro-max',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/xobi667/ui-ux-pro-max/SKILL.md',
+                description: 'UI/UX design intelligence and implementation guidance for building polished interfaces',
+                category: 'Web & Frontend Development',
+                explanation: '用于构建精美界面的UI/UX设计智能和实施指导',
+                rating: 4.6,
+                downloads: 690,
+                favorites: 58
+            },
+            {
+                name: 'ux-audit',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/tommygeoco/ux-audit/SKILL.md',
+                description: 'AI skill for automated design audits',
+                category: 'Web & Frontend Development',
+                explanation: '用于自动设计审核的AI技能',
+                rating: 4.3,
+                downloads: 520,
+                favorites: 43
+            },
+            {
+                name: 'ux-decisions',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/tommygeoco/ux-decisions/SKILL.md',
+                description: 'AI skill for the Making UX Decisions framework (uxdecisions.com) by Tommy Geoco',
+                category: 'Web & Frontend Development',
+                explanation: 'Tommy Geoco的Making UX Decisions框架的AI技能(uxdecisions.com)',
+                rating: 4.5,
+                downloads: 570,
+                favorites: 47
+            },
+            {
+                name: 'ux-researcher-designer',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/alirezarezvani/ux-researcher-designer/SKILL.md',
+                description: 'UX research and design toolkit for Senior UX Designer/Researcher including data-driven persona generation, journey',
+                category: 'Web & Frontend Development',
+                explanation: '高级UX设计师/研究员的UX研究和设计工具包，包括数据驱动的人物角色生成、用户旅程',
+                rating: 4.7,
+                downloads: 710,
+                favorites: 61
+            },
+            {
+                name: 'vercel-react-best-practices',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/sharanga10/vercel-react-best-practices/SKILL.md',
+                description: 'React and Next.js performance optimization guidelines from Vercel Engineering',
+                category: 'Web & Frontend Development',
+                explanation: '来自Vercel工程的React和Next.js性能优化指南',
+                rating: 4.8,
+                downloads: 870,
+                favorites: 77
+            },
+            {
+                name: 'vision-sandbox',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/johanesalxd/vision-sandbox/SKILL.md',
+                description: 'Agentic Vision via Gemini\'s native Code Execution sandbox',
+                category: 'Web & Frontend Development',
+                explanation: '通过Gemini的原生代码执行沙盒进行代理视觉',
+                rating: 4.4,
+                downloads: 590,
+                favorites: 46
+            },
+            {
+                name: 'web-design-guidelines',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/sharanga10/web-design-guidelines/SKILL.md',
+                description: 'Review UI code for Web Interface Guidelines compliance',
+                category: 'Web & Frontend Development',
+                explanation: '审查UI代码以符合Web界面指南',
+                rating: 4.6,
+                downloads: 640,
+                favorites: 55
+            },
+            {
+                name: 'webapp-testing',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/seanphan/webapp-testing/SKILL.md',
+                description: 'Toolkit for interacting with and testing local web applications using Playwright',
+                category: 'Web & Frontend Development',
+                explanation: '使用Playwright与本地Web应用程序交互和测试的工具包',
+                rating: 4.5,
+                downloads: 550,
+                favorites: 49
+            },
+            {
+                name: 'winamp',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/jage9/winamp/SKILL.md',
+                description: 'Control Winamp on Windows (Native or WSL2) or Linux (via Wine)',
+                category: 'Web & Frontend Development',
+                explanation: '在Windows（本机或WSL2）或Linux（通过Wine）上控制Winamp',
+                rating: 4.1,
+                downloads: 440,
+                favorites: 35
+            },
+            {
+                name: 'xcodebuildmcp',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/ipavlidakis/xcodebuildmcp/SKILL.md',
+                description: 'Use when the user needs Xcode build/test/run workflows, simulator or device control, UI automation',
+                category: 'Web & Frontend Development',
+                explanation: '当用户需要Xcode构建/测试/运行工作流、模拟器或设备控制、UI自动化时使用',
+                rating: 4.3,
+                downloads: 500,
+                favorites: 39
+            },
+            {
+                name: 'zoho-email-integration',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/briansmith80/zoho-email-integration/SKILL.md',
+                description: 'Complete Zoho Mail integration with OAuth2, REST API (5-10x faster), HTML emails, attachments',
+                category: 'Web & Frontend Development',
+                explanation: '使用OAuth2、REST API（快5-10倍）、HTML邮件、附件的完整Zoho Mail集成',
+                rating: 4.6,
+                downloads: 660,
+                favorites: 51
+            },
+            {
+                name: 'agenticflow-skill',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/seanphan/agenticflow-skill/SKILL.md',
+                description: 'Comprehensive guide for building AI workflows, agents, and workforce systems with AgenticFlow',
+                category: 'Coding Agents & IDEs',
+                explanation: '使用AgenticFlow构建AI工作流、代理和工作力系统的综合指南',
+                rating: 4.7,
+                downloads: 720,
+                favorites: 63
+            },
+            {
+                name: 'agentlens',
+                url: 'https://github.com/openclaw/skills/tree/main/skills/nguyenphutrong/agentlens/SKILL.md',
+                description: 'Navigate and understand codebases using agentlens hierarchical documentation',
+                category: 'Coding Agents & IDEs',
+                explanation: '使用agentlens分层文档导航和理解代码库',
+                rating: 4.5,
+                downloads: 580,
+                favorites: 42
+            }
+        ];
+
+        // 技能数据按类别分组
+        const categories = {};
+        skills.forEach(skill => {
+            if (!categories[skill.category]) {
+                categories[skill.category] = [];
+            }
+            categories[skill.category].push(skill);
+        });
+
+        // 当前显示的技能
+        let currentSkills = skills;
+        let currentPage = 1;
+        const itemsPerPage = 20;
+
+        // 初始化页面
+        function initPage() {
+            updateFilters();
+            renderSkills();
+            updateUserStatus();
+        }
+
+        // 更新分类筛选按钮
+        function updateFilters() {
+            const filtersContainer = document.querySelector('.filters');
+            const categoryNames = Object.keys(categories);
+            
+            // 添加分类按钮
+            categoryNames.forEach(category => {
+                const button = document.createElement('button');
+                button.className = 'filter-btn';
+                button.textContent = category;
+                button.onclick = () => filterByCategory(category);
+                filtersContainer.appendChild(button);
+            });
+        }
+
+        // 按类别筛选
+        function filterByCategory(category) {
+            // 更新按钮状态
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            if (category === 'all') {
+                currentSkills = skills;
+            } else {
+                currentSkills = skills.filter(skill => skill.category === category);
+            }
+            
+            // 重置搜索框
+            document.getElementById('searchInput').value = '';
+            
+            renderSkills();
+        }
+
+        // 搜索功能
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            if (searchTerm === '') {
+                // 如果搜索框为空，显示当前类别下的所有技能
+                const activeCategory = document.querySelector('.filter-btn.active').textContent;
+                if (activeCategory === '全部') {
+                    currentSkills = skills;
+                } else {
+                    currentSkills = skills.filter(skill => skill.category === activeCategory);
+                }
+            } else {
+                // 搜索功能
+                currentSkills = skills.filter(skill => 
+                    skill.name.toLowerCase().includes(searchTerm) ||
+                    skill.description.toLowerCase().includes(searchTerm) ||
+                    skill.explanation.toLowerCase().includes(searchTerm) ||
+                    skill.category.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            renderSkills();
+        });
+
+        // 渲染技能
+        function renderSkills(page = 1) {
+            const container = document.getElementById('skillsContainer');
+            const noResults = document.getElementById('noResults');
+            const pagination = document.getElementById('pagination');
+            
+            // 计算分页
+            const totalPages = Math.ceil(currentSkills.length / itemsPerPage);
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, currentSkills.length);
+            const skillsToShow = currentSkills.slice(startIndex, endIndex);
+            
+            // 更新页面状态
+            currentPage = page;
+            
+            if (skillsToShow.length === 0) {
+                container.style.display = 'none';
+                noResults.style.display = 'block';
+                pagination.innerHTML = '';
+                return;
+            }
+            
+            container.style.display = 'block';
+            noResults.style.display = 'none';
+            
+            // 按类别分组显示
+            const skillsByCategory = {};
+            skillsToShow.forEach(skill => {
+                if (!skillsByCategory[skill.category]) {
+                    skillsByCategory[skill.category] = [];
+                }
+                skillsByCategory[skill.category].push(skill);
+            });
+            
+            let html = '';
+            Object.entries(skillsByCategory).forEach(([category, skills]) => {
+                html += `
+                    <div class="category">
+                        <div class="category-header" onclick="toggleCategory('${category}')">
+                            <div class="category-name">${category}</div>
+                            <div class="skill-count">${skills.length} 项技能</div>
+                        </div>
+                        <div id="skills-${category}" class="skills-list" style="display: block;">
+                            <div class="skills-grid">
+                `;
+                
+                skills.forEach(skill => {
+                    html += `
+                        <div class="skill-card">
+                            <div class="skill-name">${skill.name}</div>
+                            <div class="skill-description">${skill.explanation}</div>
+                            <a href="${skill.url}" target="_blank" class="skill-link">查看详情</a>
+                            
+                            <!-- 评分组件 -->
+                            <div id="rating-${skill.name}" class="rating-container"></div>
+                            
+                            <!-- 评论组件 -->
+                            <div id="comments-${skill.name}" class="comments-container"></div>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            
+            // 初始化评分和评论组件
+            skillsToShow.forEach(skill => {
+                // 初始化评分组件
+                setTimeout(() => {
+                    if (document.getElementById(`rating-${skill.name}`)) {
+                        new RatingComponent(`rating-${skill.name}`, skill.name);
+                    }
+                }, 100);
+                
+                // 初始化评论组件
+                setTimeout(() => {
+                    if (document.getElementById(`comments-${skill.name}`)) {
+                        new CommentComponent(`comments-${skill.name}`, skill.name);
+                    }
+                }, 200);
+            });
+            
+            // 渲染分页
+            renderPagination(totalPages, page);
+        }
+
+        // 渲染分页
+        function renderPagination(totalPages, currentPage) {
+            const pagination = document.getElementById('pagination');
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+            
+            let html = '';
+            
+            // 上一页
+            if (currentPage > 1) {
+                html += `<button class="page-btn" onclick="renderSkills(${currentPage - 1})">上一页</button>`;
+            }
+            
+            // 页码
+            const startPage = Math.max(1, currentPage - 2);
+            const endPage = Math.min(totalPages, currentPage + 2);
+            
+            if (startPage > 1) {
+                html += `<button class="page-btn" onclick="renderSkills(1)">1</button>`;
+                if (startPage > 2) {
+                    html += `<span class="page-btn">...</span>`;
+                }
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="renderSkills(${i})">${i}</button>`;
+            }
+            
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    html += `<span class="page-btn">...</span>`;
+                }
+                html += `<button class="page-btn" onclick="renderSkills(${totalPages})">${totalPages}</button>`;
+            }
+            
+            // 下一页
+            if (currentPage < totalPages) {
+                html += `<button class="page-btn" onclick="renderSkills(${currentPage + 1})">下一页</button>`;
+            }
+            
+            pagination.innerHTML = html;
+        }
+
+        // 切换分类展开/收起
+        function toggleCategory(category) {
+            const skillsList = document.getElementById(`skills-${category}`);
+            if (skillsList.style.display === 'none') {
+                skillsList.style.display = 'block';
+            } else {
+                skillsList.style.display = 'none';
+            }
+        }
+
+        // 用户认证相关函数
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        function openRegisterModal() {
+            document.getElementById('registerModal').style.display = 'block';
+        }
+
+        function closeRegisterModal() {
+            document.getElementById('registerModal').style.display = 'none';
+        }
+
+        async function performLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                alert('请填写完整的登录信息');
+                return;
+            }
+            
+            try {
+                const response = await AuthAPI.login(email, password);
+                setToken(response.token);
+                localStorage.setItem('yumizhi_user', JSON.stringify(response.user));
+                updateUserStatus();
+                closeLoginModal();
+                alert('登录成功！');
+            } catch (error) {
+                alert('登录失败：' + error.message);
+            }
+        }
+
+        async function performRegister() {
+            const username = document.getElementById('registerUsername').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (!username || !email || !password || !confirmPassword) {
+                alert('请填写完整信息');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('两次输入的密码不一致');
+                return;
+            }
+            
+            try {
+                const response = await AuthAPI.register(username, email, password);
+                setToken(response.token);
+                localStorage.setItem('yumizhi_user', JSON.stringify(response.user));
+                updateUserStatus();
+                closeRegisterModal();
+                alert('注册成功！');
+            } catch (error) {
+                alert('注册失败：' + error.message);
+            }
+        }
+
+        function logout() {
+            clearToken();
+            localStorage.removeItem('yumizhi_user');
+            updateUserStatus();
+            hideUserDropdown();
+            alert('已退出登录');
+        }
+
+        function updateUserStatus() {
+            const isLoggedIn = !!getToken();
+            const authButtons = document.getElementById('auth-buttons');
+            const userInfo = document.getElementById('user-info');
+            
+            if (isLoggedIn) {
+                authButtons.style.display = 'none';
+                userInfo.style.display = 'flex';
+                
+                const user = JSON.parse(localStorage.getItem('yumizhi_user'));
+                if (user) {
+                    userInfo.querySelector('span').textContent = user.username;
+                    userInfo.querySelector('.user-avatar').textContent = user.username.charAt(0).toUpperCase();
+                }
+            } else {
+                authButtons.style.display = 'flex';
+                userInfo.style.display = 'none';
+            }
+        }
+
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('user-dropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        function hideUserDropdown() {
+            document.getElementById('user-dropdown').classList.remove('show');
+        }
+
+        // 点击外部关闭下拉菜单
+        window.onclick = function(event) {
+            if (!event.target.matches('.user-info')) {
+                hideUserDropdown();
+            }
+        }
+
+        // 下载技能列表
+        function downloadSkills() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(skills, null, 2));
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", "yumizhi_skills.json");
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        }
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>

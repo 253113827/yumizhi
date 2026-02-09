@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# 网站地图
+Sitemap: https://yumizhi.com/sitemap.xml
+
+# 禁止爬虫访问的目录
+Disallow: /assets/private/
+Disallow: /temp/
+Disallow: /logs/
+
+# 爬虫访问频率
+Crawl-delay: 1
