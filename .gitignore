@@ -1,0 +1,43 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+
+# Local config with secrets
+config.json
+updated_config.json
+anthropic_config.json
+ollama_clawbot_config.json
+
+# Large data files
+youyibang-new-design/node_modules/
+youyibang-coreui/
+youyibang-coreui-lite/
+youyibang-final/
+youyibang-web/
+youyibang-project.tar.gz
+
+# Backup files
+*.backup*
+*.bak
+
+# IDE
+.vscode/
+.idea/
+
+# Other
+.agents/
+.clawdhub/
+canvas/
+exec_approvals.json

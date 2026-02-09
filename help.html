@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帮助中心 - yumizhi (玉米知)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border-radius: 10px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.2rem;
+        }
+
+        .logo-chinese {
+            font-size: 1.3rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logo-english {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: normal;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #218838;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .help-content {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            transition: border-color 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .search-box:focus {
+            border-color: #667eea;
+        }
+
+        .faq-section {
+            margin-bottom: 2rem;
+        }
+
+        .faq-section h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1rem;
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .faq-answer {
+            padding: 1rem;
+            display: none;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        .contact-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .contact-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info {
+            color: #666;
+        }
+
+        .support-hours {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #e9ecef;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+            
+            .logo {
+                align-items: center;
+            }
+            
+            .nav-menu {
+                justify-content: center;
+                gap: 0.8rem;
+                flex-wrap: wrap;
+            }
+            
+            .nav-link {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .user-menu {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-chinese">玉米知</div>
+                <div class="logo-english">yumizhi.com</div>
+            </div>
+            <div class="nav-menu">
+                <a href="/" class="nav-link"><i class="fas fa-home"></i> 首页</a>
+                <a href="/skills" class="nav-link"><i class="fas fa-th-large"></i> 技能分类</a>
+                <a href="/trending" class="nav-link"><i class="fas fa-fire"></i> 热门技能</a>
+                <a href="/user-center" class="nav-link"><i class="fas fa-user-circle"></i> 个人中心</a>
+                <a href="/about" class="nav-link"><i class="fas fa-info-circle"></i> 关于我们</a>
+                <a href="/help" class="nav-link active"><i class="fas fa-question-circle"></i> 帮助中心</a>
+            </div>
+            <div class="user-menu">
+                <div class="user-info">
+                    <div class="user-avatar">U</div>
+                    <span>用户名</span>
+                </div>
+                <button class="btn btn-outline" onclick="openLoginModal()"><i class="fas fa-sign-in-alt"></i> 登录</button>
+                <button class="btn btn-primary" onclick="openRegisterModal()"><i class="fas fa-user-plus"></i> 注册</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>帮助中心</h1>
+            <p class="subtitle">常见问题解答与支持服务</p>
+        </header>
+
+        <div class="help-content">
+            <input type="text" class="search-box" placeholder="搜索帮助文档...">
+            
+            <div class="faq-section">
+                <h2><i class="fas fa-question-circle"></i> 常见问题</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>什么是 yumizhi (玉米知)?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>yumizhi (玉米知) 是一个专注于收集和整理 OpenClaw 技能的平台。我们汇集了超过 1700 个社区贡献的 AI 技能，涵盖 Web 开发、AI 代理、Git 管理、系统运维等多个领域，帮助用户发现和使用这些强大的工具。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>如何使用平台上的技能?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>要使用平台上的技能，您需要首先安装 OpenClaw 框架。然后，可以通过点击技能详情页面的链接访问技能的完整文档和安装说明。每个技能都有详细的使用指南和示例代码，帮助您快速上手。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>如何添加新的技能?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>我们欢迎社区贡献新的技能！您可以通过 GitHub 提交 Pull Request，按照我们的技能标准格式创建新的技能文档。我们有详细的贡献指南，包括技能命名、描述、分类等规范。所有提交的技能都会经过社区审核后添加到平台。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>如何收藏我喜欢的技能?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>登录后，您可以在技能详情页面点击收藏按钮来收藏技能。收藏的技能会保存在您的个人中心，方便以后快速查找和使用。您也可以在个人中心管理您的收藏列表。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>如何给技能评分和评论?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>登录后，您可以在技能详情页面看到评分和评论功能。点击评分按钮可以给技能打分，撰写评论可以分享您的使用体验。这些反馈对其他用户很有帮助，也能促进技能的持续改进。</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>如何联系技术支持?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>如果您遇到问题，可以先查看常见问题或使用搜索功能。如果仍未解决，可以通过下方的联系方式与我们取得联系。我们的技术团队会在工作时间内尽快回复您的问题。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-section">
+                <h2><i class="fas fa-headset"></i> 联系支持</h2>
+                <p>如果常见问题未能解决您的问题，请通过以下方式联系我们的支持团队：</p>
+                
+                <div class="contact-methods">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-title">电子邮件</div>
+                        <div class="contact-info">support@yumizhi.com</div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-discord"></i>
+                        </div>
+                        <div class="contact-title">Discord</div>
+                        <div class="contact-info">@yumizhi-support</div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="contact-title">GitHub Issues</div>
+                        <div class="contact-info">yumizhi/issues</div>
+                    </div>
+                </div>
+                
+                <div class="support-hours">
+                    <h3><i class="fas fa-clock"></i> 支持时间</h3>
+                    <p>周一至周五: 9:00 - 18:00 (北京时间)</p>
+                    <p>紧急问题: 24小时响应</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 登录弹窗 -->
+    <div id="loginModal" class="modal" style="display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+        <div class="modal-content" style="background-color: white; margin: 15% auto; padding: 2rem; border-radius: 10px; width: 90%; max-width: 400px; position: relative;">
+            <span class="close" onclick="closeLoginModal()" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; position: absolute; right: 15px; top: 10px; cursor: pointer;">&times;</span>
+            <h2 style="margin-bottom: 1.5rem; text-align: center;">用户登录</h2>
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <input type="email" class="form-control" placeholder="请输入邮箱地址" id="loginEmail" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+            </div>
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <input type="password" class="form-control" placeholder="请输入密码" id="loginPassword" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+            </div>
+            <button class="modal-btn" onclick="performLogin()" style="width: 100%; padding: 0.8rem; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;">登录</button>
+            <div class="modal-footer" style="margin-top: 1rem; text-align: center;">
+                <p>还没有账号？ <a href="#" onclick="openRegisterModal(); closeLoginModal();" style="color: #667eea; text-decoration: none;">立即注册</a></p>
+                <p><a href="#" style="color: #667eea; text-decoration: none;">忘记密码？</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 注册弹窗 -->
+    <div id="registerModal" class="modal" style="display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+        <div class="modal-content" style="background-color: white; margin: 15% auto; padding: 2rem; border-radius: 10px; width: 90%; max-width: 400px; position: relative;">
+            <span class="close" onclick="closeRegisterModal()" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; position: absolute; right: 15px; top: 10px; cursor: pointer;">&times;</span>
+            <h2 style="margin-bottom: 1.5rem; text-align: center;">用户注册</h2>
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <input type="text" class="form-control" placeholder="请输入用户名" id="registerUsername" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+            </div>
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <input type="email" class="form-control" placeholder="请输入邮箱地址" id="registerEmail" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+            </div>
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <input type="password" class="form-control" placeholder="请输入密码" id="registerPassword" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+            </div>
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <input type="password" class="form-control" placeholder="请再次输入密码" id="confirmPassword" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+            </div>
+            <button class="modal-btn" onclick="performRegister()" style="width: 100%; padding: 0.8rem; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;">注册</button>
+            <div class="modal-footer" style="margin-top: 1rem; text-align: center;">
+                <p>已有账号？ <a href="#" onclick="openLoginModal(); closeRegisterModal();" style="color: #667eea; text-decoration: none;">立即登录</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // FAQ 展开/收起功能
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.classList.contains('show')) {
+                answer.classList.remove('show');
+                icon.className = 'fas fa-chevron-down';
+            } else {
+                answer.classList.add('show');
+                icon.className = 'fas fa-chevron-up';
+            }
+        }
+
+        // 模态框功能
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        function openRegisterModal() {
+            document.getElementById('registerModal').style.display = 'block';
+        }
+
+        function closeRegisterModal() {
+            document.getElementById('registerModal').style.display = 'none';
+        }
+
+        function performLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if(email && password) {
+                alert('登录功能演示：登录成功！');
+                closeLoginModal();
+            } else {
+                alert('请填写完整的登录信息');
+            }
+        }
+
+        function performRegister() {
+            const username = document.getElementById('registerUsername').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if(username && email && password && confirmPassword) {
+                if(password === confirmPassword) {
+                    alert('注册功能演示：注册成功！');
+                    closeRegisterModal();
+                } else {
+                    alert('两次输入的密码不一致');
+                }
+            } else {
+                alert('请填写完整的注册信息');
+            }
+        }
+
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            const loginModal = document.getElementById('loginModal');
+            const registerModal = document.getElementById('registerModal');
+            
+            if (event.target === loginModal) {
+                closeLoginModal();
+            }
+            
+            if (event.target === registerModal) {
+                closeRegisterModal();
+            }
+        }
+    </script>
+</body>
+</html>
