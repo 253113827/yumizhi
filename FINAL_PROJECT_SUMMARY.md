@@ -38,7 +38,14 @@ yumizhi (玉米知) 是一个 OpenClaw 技能集合网站，为用户提供发�
 - 项目完成报告
 - 部署脚本和说明
 - 内存记录和长期记忆
+- 完整的文档体系（57个Markdown文件）
 - 所有文件已提交到 GitHub 仓库
 
 ## 后续维护
 项目已完成，进入自动化维护阶段。系统将定期检查网站状态、更新技能集合并验证备份完整性。
+
+## 项目工件清单
+详细工件清单请参见：yumizhi_project_artifacts.md
+
+## 文档摘要
+详细文档摘要请参见：project_documentation_summary.md
